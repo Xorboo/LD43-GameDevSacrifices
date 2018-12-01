@@ -1,13 +1,9 @@
-class BaseTextButton extends PIXI.Sprite {
+class BaseTextButton extends PIXI.Container {
     constructor(normalImage, pressedImage, text, normalTextStyle, hoveredTextStyle) {
-        let baseTex = PIXI.Texture.fromImage(normalImage);
-        super(baseTex);
-        this.pressedTexture = PIXI.Texture.fromImage(pressedImage);
-        this.normalTexture = baseTex;
+        super();
 
         this.interactive = true;
         this.buttonMode = true;
-        this.anchor.set(0.5);
         this
             .on('pointerdown', this.onButtonDown)
             .on('pointerup', this.onButtonUp)
@@ -16,12 +12,26 @@ class BaseTextButton extends PIXI.Sprite {
             .on('pointerout', this.onButtonOut)
             .on('click', this.onButtonClicked);
 
+        if (normalImage) {
+            if (!pressedImage) {
+                pressedImage = normalImage;
+            }
+
+            this.normalTexture = PIXI.Texture.fromImage(normalImage);
+            this.pressedTexture = PIXI.Texture.fromImage(pressedImage);
+
+            this.button = new PIXI.Sprite(this.normalTexture);
+            this.button.anchor.set(0.5);
+            this.button.position.set(this.width / 2, this.height / 2);
+            this.addChild(this.button);
+        }
+
         this.normalTextStyle = normalTextStyle;
         this.hoveredTextStyle = hoveredTextStyle;
         this.text = new PIXI.Text(text, this.normalTextStyle);
         this.text.anchor.set(0.5);
-        this.addChild(this.text);
         this.text.position.set(this.width / 2, this.height / 2);
+        this.addChild(this.text);
 
         this.clickCallback = null;
     }
@@ -31,13 +41,17 @@ class BaseTextButton extends PIXI.Sprite {
     }
 
     setButtonTexture(buttonTexture) {
-        this.texture = buttonTexture;
-        this.dirty = true;
+        if (this.button) {
+            this.button.texture = buttonTexture;
+            this.dirty = true;
+        }
     }
 
     setTextStyle(textStyle) {
-        this.text.style = textStyle;
-        this.text.dirty = true;
+        if (this.text) {
+            this.text.style = textStyle;
+            this.text.dirty = true;
+        }
     }
 
     onButtonDown() {
