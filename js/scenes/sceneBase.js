@@ -11,8 +11,6 @@ class SceneBase extends PIXI.Container {
         this.background.width = Params.application.width;
         this.background.height = Params.application.height;
         this.addChild(this.background);
-
-        this.addChild(message);
     }
 
     init(data) {

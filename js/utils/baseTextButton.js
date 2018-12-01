@@ -27,7 +27,7 @@ class BaseTextButton extends PIXI.Container {
         }
 
         this.normalTextStyle = normalTextStyle;
-        this.hoveredTextStyle = hoveredTextStyle;
+        this.hoveredTextStyle = hoveredTextStyle != null ? hoveredTextStyle : normalTextStyle;
         this.text = new PIXI.Text(text, this.normalTextStyle);
         this.text.anchor.set(0.5);
         this.text.position.set(this.width / 2, this.height / 2);

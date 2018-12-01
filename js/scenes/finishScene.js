@@ -18,9 +18,17 @@ class FinishScene extends SceneBase {
     init(data) {
         super.init(data);
 
-        for (let perk in data.finalPerks) {
-            this.addPerk(perk);
+        this.clearPerks();
+        for (let perkKey in data.finalPerks) {
+            this.addPerk(data.finalPerks[perkKey]);
         }
+    }
+
+    clearPerks() {
+        for (let perkKey in this.perks) {
+            this.removeChild(this.perks[perkKey]);
+        }
+        this.perks = [];
     }
 
     addPerk(text) {
