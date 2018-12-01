@@ -1,6 +1,6 @@
 class StartScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, Params.textures.background.start, "Thats a start!");
+        super(switchCallback, Params.textures.background.start);
         
         let startButton = new TextButton(Params.text.button_start);
         startButton.position.set(Params.application.width / 2, Params.application.height - 100);

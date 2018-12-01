@@ -1,6 +1,6 @@
 class FailScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, Params.textures.background.start, "Thats a fail!");
+        super(switchCallback, Params.textures.background.start);
         
         let restartButton = new TextButton(Params.text.button_restart);
         restartButton.position.set(Params.application.width - 120, Params.application.height - 50);

@@ -38,6 +38,26 @@ const Params = {
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
         }),
+        finalHeader: new PIXI.TextStyle({
+            fontFamily: "Arial",
+            fontSize: 64,
+            fontWeight: "bold",
+            fill: "white",
+            stroke: "black",
+            strokeThickness: 8,
+            dropShadow: true,
+            dropShadowColor: "#444444",
+            dropShadowBlur: 8,
+            dropShadowAngle: Math.PI / 6,
+            dropShadowDistance: 6,
+        }),
+        finalPerk: new PIXI.TextStyle({
+            fontFamily: "Arial",
+            fontSize: 42,
+            fill: "white",
+            stroke: "black",
+            strokeThickness: 4
+        }),
         buttonNormal: new PIXI.TextStyle({
             fontFamily: "Arial",
             fontSize: 30,
