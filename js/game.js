@@ -16,53 +16,10 @@ let scenes = null;
 
 init();
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
 function init() {
     // Basic initialization
     const app = new PIXI.Application(Params.application);
     document.body.appendChild(app.view);
-
-    //#region Test
-    const banniesTexture = new PIXI.Texture.fromImage("assets/bunnies.png");
-
-    const bunnies = [
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 47, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 86, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 125, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 164, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 2, imageSize.x, imageSize.y))),
-    ];
-
-    const container = new PIXI.particles.ParticleContainer(fieldSize.x * fieldSize.y, [false, true, false, false, false]);
-    app.stage.addChild(container);
-
-    const fieldData = new Array(fieldSize.y);
-    const fieldView = new Array(fieldSize.y);
-    for (let y = 0, yy = fieldData.length; y < yy; ++y) {
-        fieldData[y] = new Array(fieldSize.x);
-        fieldView[y] = new Array(fieldSize.x);
-    }
-
-    generateField(fieldData);
-
-    for (let y = 0, yy = fieldData.length; y < yy; ++y) {
-        const row = fieldData[y];
-        for (let x = 0, xx = row.length; x < xx; ++x) {
-            let value = row[x];
-            if (0 < value) {
-                value -= 1;
-                const bunny = new PIXI.Sprite(bunnies[value]);
-                bunny.x = x * imageSize.x;
-                bunny.y = y * imageSize.y;
-                container.addChild(bunny);
-                fieldView[y][x] = bunny;
-            }
-        }
-    }
-    //#endregion Test
 
     // Initialize scenes
     scenes = {
@@ -97,14 +54,3 @@ function update(deltaTime) {
         currentScene.update(deltaTime);
     }
 }
-
-//#region TEST
-function generateField(field) {
-    for (let y = 0, yy = field.length; y < yy; ++y) {
-        const row = field[y];
-        for (let x = 0, xx = row.length; x < xx; ++x) {
-            row[x] = randomInt(0, typesCount);
-        }
-    }
-}
-//#endregion
