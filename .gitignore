@@ -80,3 +80,6 @@ typings/
 
 # IDE
 .idea*
+
+# VSCode workspace
+*.code-workspace
