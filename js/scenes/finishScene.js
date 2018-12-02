@@ -19,8 +19,8 @@ class FinishScene extends SceneBase {
         super.init(data);
 
         this.clearPerks();
-        for (let perkKey in data.finalPerks) {
-            this.addPerk(data.finalPerks[perkKey]);
+        for (let chipKey in data.finalChips) {
+            this.addPerk(data.finalChips[chipKey]);
         }
     }
 
@@ -31,11 +31,11 @@ class FinishScene extends SceneBase {
         this.perks = [];
     }
 
-    addPerk(text) {
+    addPerk(chip) {
         const perkInitialHeight = this.headerText.position.y + 70;
         const perkDeltaHeight = 50;
 
-        let perk = new PIXI.Text(text, Params.textStyle.finalPerk);
+        let perk = new PIXI.Text(chip.text, Params.textStyle.finalPerk);
         perk.anchor.set(0.5);
         const perkHeight = perkInitialHeight + perkDeltaHeight * this.perks.length;
         perk.position.set(Params.application.width / 2, perkHeight);

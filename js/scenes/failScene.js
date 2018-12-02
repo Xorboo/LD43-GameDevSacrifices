@@ -16,7 +16,7 @@ class FailScene extends SceneBase {
     init(data) {
         super.init(data);
 
-        this.reasonText.text = data.reason;
+        this.reasonText.text = data.loseChip.text;
     }
 
     update(deltaTime) {

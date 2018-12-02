@@ -2,64 +2,89 @@ class MainScene extends SceneBase {
     constructor(switchCallback) {
         super(switchCallback, Params.textures.background.start);
 
-        let finishButton = new TextButton("Finish game");
-        finishButton.position.set(Params.application.width - 120, 50);
-        finishButton.onClick(() => this.switchCallback(Params.sceneType.FINISH, {
-            finalPerks: [
-                "Loneliness",
-                "Team left",
-                "50% discount on 10th day",
-                "Obesity",
-                "Bugs",
-                "You have a cat!"
-            ]
-        }));
-        this.addChild(finishButton);
-
-        let failButton = new TextButton("Fail game");
-        failButton.position.set(Params.application.width - 120, 100);
-        failButton.onClick(() => this.switchCallback(Params.sceneType.FAIL, { 
-            reason: "You just suck..." 
-        }));
-        this.addChild(failButton);
-
-        const chipsOnHand = generateChips();
-        const chipsCount = chipsOnHand.length;
-        this.chipsButtons = new Array(chipsCount);
+        const chipsCount = GameData.handChipsCount;
         const width = 195;
         const height = 52;
         const elementsPerRow = 4;
         const startX = Params.application.width / 2 - width * (elementsPerRow / 2 - 0.5);
         const startY = Params.application.height - height * (chipsCount / elementsPerRow);
-        for (let i = 0, n = chipsCount; i < n; ++i) {
-            const chip = chipsOnHand[i];
-            const chipButton = new TextButton(chip.text);
+
+        this.chipsButtons = [];
+        for (let i = 0; i < chipsCount; ++i) {
+            const chipButton = new ChipButton(null, (damage, chip) => this.onChipClicked(damage, chip));
             chipButton.position.set(startX + width * (i % elementsPerRow), startY + height * Math.floor(i / elementsPerRow));
-            chipButton.onClick(() => this.onChipClick(i));
-            chipButton.interactive = false;
             this.addChild(chipButton);
 
-            this.chipsButtons[i] = {
-                chip: chip,
-                button: chipButton,
-                sacrificed: false,
-            };
+            this.chipsButtons.push(chipButton);
         }
     }
 
     init(data) {
         super.init(data);
+
+        this.updateChipButtons();
+        this.startGame();
     }
 
     update(deltaTime) {
         super.update(deltaTime);
     }
 
-    onChipClick(chipIndex) {
-        const chipButton = this.chipsButtons[chipIndex];
-        chipButton.button.interactive = false;
-        chipButton.sacrificed = true;
-        // bosses[currentBossIndex].health -= 1;
-        // currentState();
+    onChipClicked(damage, chip) {
+        this.currentBoss.receiveDamage(damage);
+        console.log("Boss damaged on " + damage + ", hp left: " + this.currentBoss.health);
+        
+        if (chip.gameOver) {
+            this.loseGame(chip);
+        }
+        else if (this.currentBoss.isDead()) {
+            console.log("Boss defeated");
+            this.moveToNextBoss();
+        }
+    }
+
+    updateChipButtons() {
+        let initialChips = GameData.getInitialChips();
+        for(let i = 0; i < initialChips.length; i++) {
+            this.chipsButtons[i].setChip(initialChips[i]);
+        }
+    }
+
+    startGame() {
+        this.bossIndex = 0;
+        this.initBoss();
+    }
+
+    moveToNextBoss() {
+        for (let i = 0; i < this.chipsButtons.length; i++) {
+            this.chipsButtons[i].evolveChip(this.bossIndex);
+        }
+
+        this.bossIndex++;
+
+        if (this.bossIndex < GameData.bosses.length) {
+            this.initBoss();
+        }
+        else {
+            this.finishGame();
+        }
+    }
+
+    initBoss() {
+        this.currentBoss = new Boss(GameData.bosses[this.bossIndex]);
+        console.log("New boss, hp: " + this.currentBoss.health);
+    }
+
+    loseGame(chip) {
+        this.switchCallback(Params.sceneType.FAIL, {
+            loseChip: chip
+        });
+    }
+
+    finishGame() {
+        let finalState = {
+            finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
+        };
+        this.switchCallback(Params.sceneType.FINISH, finalState);
     }
 }

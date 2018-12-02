@@ -1,6 +1,6 @@
 let currentState = null;
 
-const chipsOnHand = generateChips();
+const chipsOnHand = GameData.getInitialChips();
 
 const chipsButtons = new Array(chipsOnHand.length);
 
@@ -15,10 +15,6 @@ continueButtonElement.addEventListener("click", function() {
         currentState();
     }
 });
-
-const Boss = function(startHealth) {
-    this.health = startHealth;
-};
 
 const bosses = [
     // new Boss(6),
