@@ -7,10 +7,16 @@ class StartScene extends SceneBase {
         startButton.onClick(() => this.switchCallback(Params.sceneType.MAIN, {}));
         this.addChild(startButton);
 
+        const leftFireAnimation = StartScene.getFireAnimation();
+        leftFireAnimation.play();
+        leftFireAnimation.x = 100;
+        leftFireAnimation.y = Params.application.height - 125;
+        this.addChild(leftFireAnimation);
+
         const rightFireAnimation = StartScene.getFireAnimation();
         rightFireAnimation.play();
-        rightFireAnimation.x = Params.application.width / 2;
-        rightFireAnimation.y = Params.application.height / 2;
+        rightFireAnimation.x = Params.application.width - 100;
+        rightFireAnimation.y = Params.application.height - 125;
         this.addChild(rightFireAnimation);
     }
 
@@ -29,7 +35,7 @@ class StartScene extends SceneBase {
             frames[i - 1] = PIXI.Texture.fromFrame('Fire_torch000' + i + '.png');
         }
         for (let i = 10; i <= framesCount; ++i) {
-            frames[i - 1] = (PIXI.Texture.fromFrame('Fire_torch00' + i + '.png'));
+            frames[i - 1] = PIXI.Texture.fromFrame('Fire_torch00' + i + '.png');
         }
         const animatedSprite = new PIXI.extras.AnimatedSprite(frames);
         animatedSprite.anchor.set(0.5);
