@@ -86,6 +86,24 @@ var getChips = function() {
         gameWithoutSoul: new Chip(
             "No Soul in game",
             ),
+
+        healthySleep: new Chip(
+            "Healthy sleep",
+            boss => chips.healthySleep,
+            boss => chips.sleepDeprivation,
+            ),
+
+        sleepDeprivation: new Chip(
+            "Sleep Deprivation",
+            boss => chips.healthySleep,
+            boss => chips.migraine,
+            ),
+
+        migraine: new Chip(
+            "Migraine",
+            boss => chips.sleepDeprivation,
+            boss => chips.leftGameDev,
+            ),
     };
 
     return chips;
@@ -118,6 +136,7 @@ var generateChips = function() {
 
     const handmakeChips = getChips();
     chips[0] = handmakeChips.personalLife;
+    chips[1] = handmakeChips.healthySleep;
 
     return chips;
 };
