@@ -36,6 +36,8 @@ function init() {
     }
     switchScene(Params.sceneType.START, {});
 
+    this.soundManager = new SoundManager();
+    
     // Add frame ticker
     app.ticker.add(delta => update(delta * 16 / 1000));
 }

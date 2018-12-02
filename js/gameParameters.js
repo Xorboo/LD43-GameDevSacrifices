@@ -82,6 +82,10 @@ const Params = {
         }
     },
 
+    sounds: {
+        bgMusic: "assets/music/LD43_Music.mp3"
+    },
+
     text: {
         button_start: "GO",
         button_restart: "RESTART"
