@@ -5,9 +5,8 @@ let scenes = null;
 
 // TODO: loading everything here
 const loader = new PIXI.loaders.Loader("./assets");
-// loader.add(Params.textures.button.normal);
-loader.once('complete', init);
-loader.load();
+loader.add("atlases/atlas.json");
+loader.load(init);
 
 function init() {
     // Basic initialization

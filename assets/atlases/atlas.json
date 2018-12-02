@@ -1,0 +1,184 @@
+{"frames": {
+
+"Fire_torch0001.png":
+{
+	"frame": {"x":0,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0002.png":
+{
+	"frame": {"x":186,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0003.png":
+{
+	"frame": {"x":372,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0004.png":
+{
+	"frame": {"x":558,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0005.png":
+{
+	"frame": {"x":744,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0006.png":
+{
+	"frame": {"x":930,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0007.png":
+{
+	"frame": {"x":1116,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0008.png":
+{
+	"frame": {"x":1302,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0009.png":
+{
+	"frame": {"x":1488,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0010.png":
+{
+	"frame": {"x":1674,"y":0,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0011.png":
+{
+	"frame": {"x":0,"y":340,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Fire_torch0012.png":
+{
+	"frame": {"x":186,"y":340,"w":186,"h":340},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":186,"h":340},
+	"sourceSize": {"w":186,"h":340}
+},
+"Plashka in game.png":
+{
+	"frame": {"x":372,"y":340,"w":1164,"h":873},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1164,"h":873},
+	"sourceSize": {"w":1164,"h":873}
+},
+"Rudolf_run_0001.png":
+{
+	"frame": {"x":1536,"y":340,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0003.png":
+{
+	"frame": {"x":0,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0005.png":
+{
+	"frame": {"x":271,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0007.png":
+{
+	"frame": {"x":542,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0009.png":
+{
+	"frame": {"x":813,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0011.png":
+{
+	"frame": {"x":1084,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0013.png":
+{
+	"frame": {"x":1355,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+},
+"Rudolf_run_0015.png":
+{
+	"frame": {"x":1626,"y":1213,"w":271,"h":383},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":271,"h":383},
+	"sourceSize": {"w":271,"h":383}
+}},
+"animations": {
+	"Fire_torch": ["Fire_torch0001.png","Fire_torch0002.png","Fire_torch0003.png","Fire_torch0004.png","Fire_torch0005.png","Fire_torch0006.png","Fire_torch0007.png","Fire_torch0008.png","Fire_torch0009.png","Fire_torch0010.png","Fire_torch0011.png","Fire_torch0012.png"],
+	"Rudolf_run": ["Rudolf_run_0001.png","Rudolf_run_0003.png","Rudolf_run_0005.png","Rudolf_run_0007.png","Rudolf_run_0009.png","Rudolf_run_0011.png","Rudolf_run_0013.png","Rudolf_run_0015.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1897,"h":1596},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:01efb0d06d0cb67845ef28875708f604:795f4f17a27fbf48cf596a4dd3c51b4c:d8a437306bd23494f81c694ac29ca037$"
+}
+}
