@@ -1,20 +1,13 @@
-const fieldSize = {
-    x: 5,
-    y: 7,
-};
-const imageSize = {
-    x: 26,
-    y: 37,
-}
-const typesCount = 6;
-
 
 const initialScene = Params.sceneType.START;
 let currentScene = null;
 let scenes = null;
 
-
-init();
+// TODO: loading everything here
+const loader = new PIXI.loaders.Loader("./assets");
+// loader.add(Params.textures.button.normal);
+loader.once('complete', init);
+loader.load();
 
 function init() {
     // Basic initialization

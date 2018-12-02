@@ -54,8 +54,8 @@ var getChips = function() {
 
         children: new Chip(
             "Children",
-            boss => chips.happyRetirement,
-            boss => chips.divorce,
+            _ => chips.happyRetirement,
+            _ => chips.divorce,
             ),
 
         deepGame: new Chip(
@@ -89,38 +89,38 @@ var getChips = function() {
 
         healthySleep: new Chip(
             "Healthy sleep",
-            boss => chips.healthySleep,
-            boss => chips.sleepDeprivation,
+            _ => chips.healthySleep,
+            _ => chips.sleepDeprivation,
             ),
 
         sleepDeprivation: new Chip(
             "Sleep Deprivation",
-            boss => chips.healthySleep,
-            boss => chips.migraine,
+            _ => chips.healthySleep,
+            _ => chips.migraine,
             ),
 
         migraine: new Chip(
             "Migraine",
-            boss => chips.sleepDeprivation,
-            boss => chips.leftGameDev,
+            _ => chips.sleepDeprivation,
+            _ => chips.leftGameDev,
             ),
 
         vacation: new Chip(
             "Vacation",
-            boss => chips.vacation,
-            boss => chips.chronicFatigueSyndrome,
+            _ => chips.vacation,
+            _ => chips.chronicFatigueSyndrome,
             ),
 
         chronicFatigueSyndrome: new Chip(
             "Chronic fatigue syndrome",
-            boss => chips.vacation,
-            boss => chips.neurosis,
+            _ => chips.vacation,
+            _ => chips.neurosis,
             ),
 
         neurosis: new Chip(
             "Neurosis",
-            boss => chips.chronicFatigueSyndrome,
-            boss => chips.occupationalBurnout,
+            _ => chips.chronicFatigueSyndrome,
+            _ => chips.occupationalBurnout,
             ),
 
         occupationalBurnout: new Chip(
