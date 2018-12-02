@@ -1,41 +1,90 @@
 class Chip {
-    constructor(text, onStay, onSacrifice) {
+    constructor(text, onStay, onSacrifice, gameOver = false) {
         this.text = text;
         this.onStay = onStay;
         this.onSacrifice = onSacrifice;
+        this.gameOver = gameOver;
     }
 }
 
 var getChips = function() {
     let chips = {
-        example: new Chip(
-            "Some Text",
-            boss => chips.example,
-            boss => chips.example,
-            ),
-
         personalLife: new Chip(
             "Personal Life",
-            boss => chips.significantOtter,
+            bossIndex => {
+                if (bossIndex === 0 ||
+                    bossIndex === 3) {
+                    return chips.relationship;
+                } else {
+                    return chips.personalLife;
+                }
+            },
+            _ => chips.loneliness,
             ),
 
-        significantOtter: new Chip(
-            "Significant Otter",
-            boss => chips.family,
+        loneliness: new Chip(
+            "Loneliness",
+            _ => chips.personalLife,
+            _ => chips.depression,
+            ),
+
+        relationship: new Chip(
+            "Relationship",
+            _ => chips.family,
+            _ => chips.depression,
+            ),
+
+        depression: new Chip(
+            "Depression",
+            bossIndex => {
+                if (bossIndex === 2) {
+                    return chips.deepGame;
+                } else {
+                    return chips.loneliness;
+                }
+            },
+            _ => chips.leftGameDev,
             ),
 
         family: new Chip(
             "Family",
-            boss => chips.children,
+            _ => chips.children,
+            _ => chips.depression,
             ),
 
         children: new Chip(
             "Children",
             boss => chips.happyRetirement,
+            boss => chips.divorce,
+            ),
+
+        deepGame: new Chip(
+            "Deep Themes in game",
+            _ => chips.playersTears,
+            _ => chips.gameWithoutSoul,
+            ),
+
+        leftGameDev: new Chip(
+            "Left GameDev",
+            null,
+            null,
+            true,
+            ),
+
+        divorce: new Chip(
+            "Divorce",
             ),
 
         happyRetirement: new Chip(
             "Happy Retirement",
+            ),
+
+        playersTears: new Chip(
+            "Players tears",
+            ),
+
+        gameWithoutSoul: new Chip(
+            "No Soul in game",
             ),
     };
 
@@ -43,11 +92,11 @@ var getChips = function() {
 };
 
 var generateChips = function() {
-    let chips = new Array();
+    const chips = new Array();
     const startCount = 16;
     const bossCount = 4;
     for (let i = 0; i < startCount; ++i) {
-        let name = i.toString();
+        const name = i.toString();
         chips.push(new Chip(
             name,
             _ => GetChip(name, false, 0),
@@ -59,13 +108,16 @@ var generateChips = function() {
         if (bossIndex == bossCount) {
             return null;
         }
-        let name = parentName + (isSacrefice ? '-' : '+');
+        const name = parentName + (isSacrefice ? '-' : '+');
         return new Chip(
             name,
             _ => GetChip(name, false, bossIndex + 1),
             _ => GetChip(name, true, bossIndex + 1)
             );
     }
+
+    const handmakeChips = getChips();
+    chips[0] = handmakeChips.personalLife;
 
     return chips;
 };

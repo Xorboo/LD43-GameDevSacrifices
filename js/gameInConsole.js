@@ -100,6 +100,7 @@ function bossLoop() {
 
 function bossResult() {
     printText("Results:");
+    let isGameOver = null;
     for (let i = 0, n = chipsButtons.length; i < n; ++i) {
         const chipButton = chipsButtons[i];
         const previousChip = chipButton.chip;
@@ -107,6 +108,7 @@ function bossResult() {
         if (chipButton.sacrificed) {
             newChip = chipButton.chip.onSacrifice(0);
             chipButton.sacrificed = false;
+            isGameOver = isGameOver || newChip.gameOver;
         } else {
             newChip = chipButton.chip.onStay(0);
         } 
@@ -114,7 +116,11 @@ function bossResult() {
         chipButton.button.innerHTML = newChip.text;
         chipButton.chip = newChip;
     }
-    currentState = nextBoss;
+    if (isGameOver) {
+        currentState = badEnding;
+    } else {
+        currentState = nextBoss;
+    }
 }
 
 function nextBoss() {
@@ -128,7 +134,18 @@ function nextBoss() {
     }
 }
 
+function badEnding() {
+    printText("Bad Ending!");
+    continueButtonElement.disabled = true;
+    for (let i = 0, n = chipsButtons.length; i < n; ++i) {
+        chipsButtons[i].button.disabled = true;
+    }
+}
+
 function gameOver() {
     printText("Game over!");
     continueButtonElement.disabled = true;
+    for (let i = 0, n = chipsButtons.length; i < n; ++i) {
+        chipsButtons[i].button.disabled = true;
+    }
 }
