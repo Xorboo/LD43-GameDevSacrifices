@@ -104,6 +104,31 @@ var getChips = function() {
             boss => chips.sleepDeprivation,
             boss => chips.leftGameDev,
             ),
+
+        vacation: new Chip(
+            "Vacation",
+            boss => chips.vacation,
+            boss => chips.chronicFatigueSyndrome,
+            ),
+
+        chronicFatigueSyndrome: new Chip(
+            "Chronic fatigue syndrome",
+            boss => chips.vacation,
+            boss => chips.neurosis,
+            ),
+
+        neurosis: new Chip(
+            "Neurosis",
+            boss => chips.chronicFatigueSyndrome,
+            boss => chips.occupationalBurnout,
+            ),
+
+        occupationalBurnout: new Chip(
+            "Occupational Burnout",
+            null,
+            null,
+            true,
+            ),
     };
 
     return chips;
@@ -137,6 +162,7 @@ var generateChips = function() {
     const handmakeChips = getChips();
     chips[0] = handmakeChips.personalLife;
     chips[1] = handmakeChips.healthySleep;
+    chips[2] = handmakeChips.vacation;
 
     return chips;
 };
