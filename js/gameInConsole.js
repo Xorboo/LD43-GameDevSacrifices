@@ -6,8 +6,16 @@ let startPack = [
 
 startPack = chips;
 
+let btn = document.createElement("BUTTON");
+document.body.appendChild(btn);
+
+let element = document.getElementById("test_output");
+element.innerHTML = "";
+
+
 function printChips(chip) {
     console.log(chip.text);
+    element.innerHTML += chip.text + '<br/>';
     if (chip.onStay != null) {
         let c = chip.onStay(0);
         if (c != null) {
