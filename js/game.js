@@ -29,7 +29,7 @@ function init() {
     switchScene(Params.sceneType.START, {});
 
     this.soundManager = new SoundManager();
-    
+
     // Add frame ticker
     app.ticker.add(delta => update(delta * 16 / 1000));
 }
@@ -47,4 +47,5 @@ function update(deltaTime) {
     if (currentScene) {
         currentScene.update(deltaTime);
     }
+    PIXI.timerManager.update();
 }

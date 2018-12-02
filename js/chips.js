@@ -7,21 +7,6 @@ class Chip {
     }
 }
 
-class Boss  {
-    constructor(bossParameters) {
-        this.health = bossParameters.health;
-    }
-
-    receiveDamage(damage) {
-        const newHealth = Math.max(0, this.health - damage);
-        this.health = newHealth;
-    }
-
-    isDead() {
-        return this.health <= 0;
-    }
-};
-
 const GameData = {
     chips: {
         personalLife: new Chip(

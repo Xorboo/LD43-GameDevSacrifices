@@ -12,6 +12,11 @@ const Params = {
         FINISH: 4
     },
 
+    shiftSpeed: 200,
+    chipEvolvePause: 0.4,
+    extraWalkTime: 1,
+    introWalkTime: 3,
+
     textStyle: {
         test: new PIXI.TextStyle({
             fontFamily: "Arial",

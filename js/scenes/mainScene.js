@@ -17,6 +17,10 @@ class MainScene extends SceneBase {
 
             this.chipsButtons.push(chipButton);
         }
+
+        this.hero = new Hero();
+        this.hero.position.set(100, Params.application.height / 2 - 100);
+        this.addChild(this.hero);
     }
 
     init(data) {
@@ -33,11 +37,10 @@ class MainScene extends SceneBase {
     onChipClicked(damage, chip) {
         this.currentBoss.receiveDamage(damage);
         console.log("Boss damaged on " + damage + ", hp left: " + this.currentBoss.health);
-        
-        if (chip.gameOver) {
-            this.loseGame(chip);
-        }
-        else if (this.currentBoss.isDead()) {
+
+        this.hero.doSacrifice();
+
+        if (this.currentBoss.isDead()) {
             console.log("Boss defeated");
             this.moveToNextBoss();
         }
@@ -45,43 +48,119 @@ class MainScene extends SceneBase {
 
     updateChipButtons() {
         let initialChips = GameData.getInitialChips();
-        for(let i = 0; i < initialChips.length; i++) {
+        for (let i = 0; i < initialChips.length; i++) {
             this.chipsButtons[i].setChip(initialChips[i]);
         }
     }
 
     startGame() {
+        if (this.currentBoss) {
+            this.removeChild(this.currentBoss);
+        }
+        
         this.bossIndex = 0;
         this.initBoss();
+
+        // Start first movement animation
+        // TODO Move player from left side of the screen first
+        // Disable player actions for animation
+        this.disableChipsFor(Params.introWalkTime);
+        this.animateCoreMovement(Params.introWalkTime);
     }
 
     moveToNextBoss() {
-        for (let i = 0; i < this.chipsButtons.length; i++) {
-            this.chipsButtons[i].evolveChip(this.bossIndex);
-        }
+        // Evolve buttons animation
+        this.hasGameOverChip = false;
+        let killedBossIndex = this.bossIndex;
+        var evolveTimer = PIXI.timerManager.createTimer(1000 * Params.chipEvolvePause);
+        evolveTimer.repeat = this.chipsButtons.length;
+        evolveTimer.on('repeat', (elapsed, repeat) => {
+            const chipButton = this.chipsButtons[repeat - 1];
+            chipButton.evolveChip(killedBossIndex);
+            chipButton.interactive = false;
 
+            if (chipButton.chip.gameOver) {
+                this.hasGameOverChip = true;
+                this.gameOverChip = chipButton.chip;
+            }
+        });
+        evolveTimer.start();
+
+        // Calculate walk animation time
+        const animationLength = Params.chipEvolvePause * this.chipsButtons.length + Params.extraWalkTime;
+
+        // Disable player actions for animation
+        this.disableChipsFor(animationLength);
+
+        // Move dead boss
+        this.currentBoss.doFakeWalk(animationLength, (boss) => this.removeChild(boss));
+
+        // Spawn new boss if needed
         this.bossIndex++;
-
         if (this.bossIndex < GameData.bosses.length) {
+            // Create new boss and move him
             this.initBoss();
+            this.animateCoreMovement(animationLength);
         }
         else {
-            this.finishGame();
+            // Wait for buttons evolution and show final screen
+            var finishGameTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+            finishGameTimer.on('end', (elapsed) => { this.finishGame(); });
+            finishGameTimer.start();
         }
+
+        // Check if we evolved to a game over chip
+        var checkGameOverTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+        checkGameOverTimer.on('end', (elapsed) => {
+            if (this.hasGameOverChip) {
+                this.loseGame(this.gameOverChip);
+            }
+        });
+        checkGameOverTimer.start();
+    }
+
+    disableChipsFor(animationLength) {
+        for (let i = 0; i < this.chipsButtons.length; i++) {
+            this.chipsButtons[i].interactive = false;
+        }
+
+        var enableChipsTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+        enableChipsTimer.on('end', (elapsed) => {
+            for (let i = 0; i < this.chipsButtons.length; i++) {
+                this.chipsButtons[i].interactive = true;
+            }
+        });
+        enableChipsTimer.start();
+    }
+
+    animateCoreMovement(animationLength) {
+        this.hero.startWalk(animationLength);
+        this.currentBoss.doWalk(this.getDesiredBossPosition(), animationLength);
+        // TODO: move background
+    }
+
+    getDesiredBossPosition() {
+        return Params.application.width - 100;
     }
 
     initBoss() {
         this.currentBoss = new Boss(GameData.bosses[this.bossIndex]);
+        this.currentBoss.position.set(Params.application.width + 200, Params.application.height / 2 - 100);
+        this.addChild(this.currentBoss);
         console.log("New boss, hp: " + this.currentBoss.health);
     }
 
     loseGame(chip) {
+        this.hero.doDeath();
+
         this.switchCallback(Params.sceneType.FAIL, {
             loseChip: chip
         });
     }
 
     finishGame() {
+        this.hero.doWin();
+
         let finalState = {
             finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
         };
