@@ -2,119 +2,57 @@ const fieldSize = {
     x: 5,
     y: 7,
 };
-
 const imageSize = {
     x: 26,
     y: 37,
 }
-
 const typesCount = 6;
 
-var currentState;
-var currentFieldData;
-var currentFieldView;
 
-Init();
+const initialScene = Params.sceneType.START;
+let currentScene = null;
+let scenes = null;
 
-function RandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
 
-function Init()
-{
-    const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
+init();
+
+function init() {
+    // Basic initialization
+    const app = new PIXI.Application(Params.application);
     document.body.appendChild(app.view);
 
-    const banniesTexture = new PIXI.Texture.fromImage("assets/bunnies.png");
-
-    const bunnies = [
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 47, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 86, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 125, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 164, imageSize.x, imageSize.y))),
-        (new PIXI.Texture(banniesTexture.baseTexture, new PIXI.Rectangle(2, 2, imageSize.x, imageSize.y))),
-    ];
-
-    const container = new PIXI.particles.ParticleContainer(fieldSize.x * fieldSize.y, [false, true, false, false, false]);
-    app.stage.addChild(container);
-
-    const fieldData = new Array(fieldSize.y);
-    const fieldView = new Array(fieldSize.y);
-    for (var y = 0, yy = fieldData.length; y < yy; ++y) {
-        fieldData[y] = new Array(fieldSize.x);
-        fieldView[y] = new Array(fieldSize.x);
+    // Initialize scenes
+    scenes = {
+        [Params.sceneType.START]: new StartScene(switchScene),
+        [Params.sceneType.MAIN]: new MainScene(switchScene),
+        [Params.sceneType.FAIL]: new FailScene(switchScene),
+        [Params.sceneType.FINISH]: new FinishScene(switchScene),
+    };
+    for (let key in Params.sceneType) {
+        const sceneId = Params.sceneType[key];
+        const scene = scenes[sceneId];
+        app.stage.addChild(scene);
+        scene.visible = false;
     }
+    switchScene(Params.sceneType.START, {});
 
-    GenerateField(fieldData);
-
-    currentFieldData = fieldData;
-    currentFieldView = fieldView;
-
-    for (var y = 0, yy = fieldData.length; y < yy; ++y) {
-        const row = fieldData[y];
-        for (var x = 0, xx = row.length; x < xx; ++x) {
-            var value = row[x];
-            if (0 < value) {
-                value -= 1;
-                const bunny = new PIXI.Sprite(bunnies[value]);
-                bunny.x = x * imageSize.x;
-                bunny.y = y * imageSize.y;
-                container.addChild(bunny);
-                fieldView[y][x] = bunny;
-            }
-        }
-    }
-
-    currentState = MoveDownState;
-
-    app.ticker.add(Update);
+    this.soundManager = new SoundManager();
+    
+    // Add frame ticker
+    app.ticker.add(delta => update(delta * 16 / 1000));
 }
 
-function GenerateField(field) {
-    for (var y = 0, yy = field.length; y < yy; ++y) {
-        const row = field[y];
-        for (var x = 0, xx = row.length; x < xx; ++x) {
-            row[x] = RandomInt(0, typesCount);
-        }
+function switchScene(sceneType, data) {
+    if (currentScene) {
+        currentScene.visible = false;
+    }
+    currentScene = scenes[sceneType]
+    currentScene.visible = true;
+    currentScene.init(data);
+}
+
+function update(deltaTime) {
+    if (currentScene) {
+        currentScene.update(deltaTime);
     }
 }
-
-function MoveDownState(delta) {
-    // MoveDown(currentFieldData);
-
-    currentState = null;
-}
-
-// function MoveDown(field) {
-//     for (var y = field.length - 1; 0 < y; --y) {
-//         const rowBtm = field[y];
-//         const rowTop = field[y + 1];
-//         for (var x = 0, xx = row.length; x < xx; ++x) {
-//             if (0 === rowBtm[x]) {
-//                 rowBtm[x] = rowTop[x];
-//                 rowTop[x] = 0;
-//             }
-//         }
-//     }
-// }
-
-function Update(delta) {
-    if (currentState != null) {
-        currentState(delta);
-    }
-
-    // const fieldData = currentFieldData;
-    // for (var y = 0, yy = fieldData.length; y < yy; ++y) {
-    //     const row = fieldData[y];
-    //     for (var x = 0, xx = row.length; x < xx; ++x) {
-    //         var value = row[x];
-    //         if (0 < value) {
-    //             value -= 1;
-    //             const bunny = fieldView[y][x];
-    //             bunny.x = x * imageSize.x;
-    //             bunny.y = y * imageSize.y;
-    //         }
-    //     }
-    // }
-}
-
