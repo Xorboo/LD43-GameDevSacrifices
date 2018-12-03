@@ -23,15 +23,59 @@ const Params = {
     afterKillDelay: 1.0,
 
     stepPeriod: 4 / 12,      // every 4 frames
-    animationSpeed: 1/5,     // 12 fps
+    animationSpeed: 1 / 5,   // 12 fps
     downscaleFactor: 0.687,
 
+    chipButtonWidth: 280,
+    chipButtonHeight: 28,
+
     textStyle: {
+        failHeader: new PIXI.TextStyle({
+            fontFamily: "Plain_Germanica",
+            fontSize: 64,
+            fill: "#660000",
+            stroke: "#999999",
+            strokeThickness: 6,
+            align: "center"
+        }),
+        loseDescription: new PIXI.TextStyle({
+            fontFamily: "DeathtoMetal",
+            fontSize: 80,
+            fill: "black",
+        }),
+
+        finishHeader: new PIXI.TextStyle({
+            fontFamily: "Plain_Germanica",
+            fontSize: 64,
+            fill: "black",
+            stroke: "#999999",
+            strokeThickness: 6,
+            align: "center"
+        }),
+        finishHint: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 20,
+            fill: "black",
+            align: "center"
+        }),
+        finishChip: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 26,
+            fill: "black",
+            align: "center"
+        }),
+        finishChipBad: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 30,
+            fill: "#661111",
+            align: "center"
+        }),
+
         introText: new PIXI.TextStyle({
             fontFamily: "Deutsch",
             fontSize: 32,
             fill: "black",
-            align : 'center'
+            align: "center"
         }),
         levelHeader: new PIXI.TextStyle({
             fontFamily: "DeathtoMetal",
@@ -66,39 +110,6 @@ const Params = {
             fill: "#661111",
         }),
 
-        loseDescription: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 64,
-            fontWeight: "bold",
-            fill: "white",
-            stroke: "black",
-            strokeThickness: 8,
-            dropShadow: true,
-            dropShadowColor: "#444444",
-            dropShadowBlur: 8,
-            dropShadowAngle: Math.PI / 6,
-            dropShadowDistance: 6,
-        }),
-        finalHeader: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 64,
-            fontWeight: "bold",
-            fill: "white",
-            stroke: "black",
-            strokeThickness: 8,
-            dropShadow: true,
-            dropShadowColor: "#444444",
-            dropShadowBlur: 8,
-            dropShadowAngle: Math.PI / 6,
-            dropShadowDistance: 6,
-        }),
-        finalPerk: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 42,
-            fill: "white",
-            stroke: "black",
-            strokeThickness: 4
-        }),
         test: new PIXI.TextStyle({
             fontFamily: "Arial",
             fontSize: 36,

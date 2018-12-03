@@ -7,8 +7,8 @@ class ChipButton extends BaseTextButton {
             Params.textStyle.chip,
             Params.textStyle.chipHover);
         this.button.alpha = 0.0;
-        this.button.width = 260;
-        this.button.height = 25;
+        this.button.width = Params.chipButtonWidth;
+        this.button.height = Params.chipButtonHeight;
 
         this.onClick(this.chipClicked);
         this.chipClickedCallback = onChipClickedCallback;

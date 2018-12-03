@@ -44,12 +44,10 @@ class StartScene extends SceneBase {
         this.introText.position.y = -40;
         textPanelSprite.addChild(this.introText);
 
-        let nextButton = new BaseTextButton(Params.textures.button.normal);
-        nextButton.onClick(() => this.showNextContainer());
-        nextButton.alpha = 0.0;
-        nextButton.width = Params.application.width;
-        nextButton.height = Params.application.height;
-        this.addChild(nextButton);
+        this.addFullscreenButton(() => {
+            SM.playButton2();
+            this.showNextContainer();
+        })
     }
 
     init(data) {
@@ -57,18 +55,14 @@ class StartScene extends SceneBase {
 
         this.currentIndex = -1;
         SM.setFirePlay(false);
-        this.showNextContainer(false);
+        this.showNextContainer();
     }
 
     update(deltaTime) {
         super.update(deltaTime);
     }
 
-    showNextContainer(playSound = true) {
-        if (playSound) {
-            SM.playButton2();
-        }
-
+    showNextContainer() {
         this.hideCurrentContainer();
 
         this.currentIndex++;

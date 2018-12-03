@@ -1,19 +1,20 @@
 class FinishScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, Params.textures.background.start);
+        super(switchCallback, null);
 
-        let restartButton = new TextButton(Params.text.button_restart);
-        restartButton.position.set(Params.application.width - 120, Params.application.height - 50);
-        restartButton.onClick(() => {
-            SM.playButton1();
-            this.switchCallback(Params.sceneType.START, {});
-        });
-        this.addChild(restartButton);
-
-        this.headerText = new PIXI.Text("You've made a game!", Params.textStyle.finalHeader);
+        this.headerText = new PIXI.Text("You've made a game!", Params.textStyle.finishHeader);
         this.headerText.anchor.set(0.5);
-        this.headerText.position.set(Params.application.width / 2, 100);
+        this.headerText.position.set(Params.application.width / 2, 150);
         this.addChild(this.headerText);
+        this.hintText = new PIXI.Text("But at what cost?", Params.textStyle.finishHint);
+        this.hintText.anchor.set(0.5);
+        this.hintText.position.set(Params.application.width / 2, 190);
+        this.addChild(this.hintText);
+
+        this.addFullscreenButton(() => {
+            SM.playButton2();
+            this.switchCallback(Params.sceneType.START, {});
+        })
 
         this.perks = [];
     }
@@ -23,10 +24,23 @@ class FinishScene extends SceneBase {
 
         SM.playGameWin();
         SM.setFirePlay(false);
-        
+
         this.clearPerks();
-        for (let chipKey in data.finalChips) {
-            this.addPerk(data.finalChips[chipKey]);
+
+        // Spawn chips
+        const chipsCount = GameData.handChipsCount;
+        const width = 450;
+        const height = 30;
+        const elementsPerRow = 1;
+        const startX = Params.application.width / 2 - width * (elementsPerRow / 2 - 0.5);
+        const startY = 240;
+
+        this.chipsButtons = [];
+        for (let i = 0; i < data.finalChips.length; i++) {
+            const chip = data.finalChips[i];
+            const x = startX + width * (i % elementsPerRow);
+            const y = startY + height * Math.floor(i / elementsPerRow);
+            this.addPerk(chip, x, y);
         }
     }
 
@@ -37,14 +51,11 @@ class FinishScene extends SceneBase {
         this.perks = [];
     }
 
-    addPerk(chip) {
-        const perkInitialHeight = this.headerText.position.y + 70;
-        const perkDeltaHeight = 50;
-
-        let perk = new PIXI.Text(chip.text, Params.textStyle.finalPerk);
+    addPerk(chip, x, y) {
+        const chipStyle = chip.gameOver ? Params.textStyle.finishChipBad : Params.textStyle.finishChip;
+        let perk = new PIXI.Text(chip.text, chipStyle);
         perk.anchor.set(0.5);
-        const perkHeight = perkInitialHeight + perkDeltaHeight * this.perks.length;
-        perk.position.set(Params.application.width / 2, perkHeight);
+        perk.position.set(x, y);
         this.addChild(perk);
         this.perks.push(perk);
     }

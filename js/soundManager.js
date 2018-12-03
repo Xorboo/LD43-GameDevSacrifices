@@ -9,7 +9,9 @@ class SoundManager {
         this.bgMusic.play();
 
         this.button1 = PIXI.loader.resources["button1"].sound;
+        this.button1.volume = 0.3;
         this.button2 = PIXI.loader.resources["button2"].sound;
+        this.button2.volume = 0.3;
         this.bossDeath = PIXI.loader.resources["bossDeath"].sound;
         this.gameOver = PIXI.loader.resources["gameOver"].sound;
         this.win = PIXI.loader.resources["win"].sound;

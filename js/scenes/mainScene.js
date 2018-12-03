@@ -57,8 +57,8 @@ class MainScene extends SceneBase {
 
         // Spawn chips
         const chipsCount = GameData.handChipsCount;
-        const width = 280;
-        const height = 28;
+        const width = Params.chipButtonWidth;
+        const height = Params.chipButtonHeight;
         const elementsPerRow = 2;
         const startX = Params.application.width / 2 - width * (elementsPerRow / 2 - 0.5);
         const startY = Params.application.height - 135;
@@ -139,7 +139,7 @@ class MainScene extends SceneBase {
         this.initBoss();
 
         // Start first movement animation
-        // TODO Move player from left side of the screen first
+        // TODO? Move player from left side of the screen first
         // Disable player actions for animation
         this.disableChipsFor(Params.introWalkTime);
         this.animateCoreMovement(Params.introWalkTime);
@@ -270,7 +270,7 @@ class MainScene extends SceneBase {
     loseGame(chip) {
         this.hero.doDeath();
 
-        // TODO Add pause if we have hero animation
+        // TODO? Add pause if we have hero animation
         this.switchCallback(Params.sceneType.FAIL, {
             loseChip: chip
         });
@@ -279,7 +279,7 @@ class MainScene extends SceneBase {
     finishGame() {
         this.hero.doWin();
 
-        // TODO Add pause if we have hero animation
+        // TODO? Add pause if we have hero animation
         let finalState = {
             finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
         };

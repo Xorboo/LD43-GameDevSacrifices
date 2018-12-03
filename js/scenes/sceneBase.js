@@ -4,7 +4,7 @@ class SceneBase extends PIXI.Container {
 
         this.switchCallback = switchCallback;
 
-        // TODO: Keep aspect and envelope?
+        // TODO? Keep aspect and envelope?
         if (backgroundTexture) {
             this.background = new PIXI.Sprite(backgroundTexture);
             this.background.anchor.set(0.5);
@@ -19,6 +19,17 @@ class SceneBase extends PIXI.Container {
     }
 
     update(deltaTime) {
+    }
+
+    addFullscreenButton(callback) {
+        let fullscreenButton = new BaseTextButton(Params.textures.button.normal);
+        fullscreenButton.button.alpha = 0;
+        fullscreenButton.button.width = Params.application.width;
+        fullscreenButton.button.height = Params.application.height;
+        fullscreenButton.position.set(Params.application.width / 2, Params.application.height / 2)
+        fullscreenButton.onClick(callback);
+        this.addChild(fullscreenButton);
+        return fullscreenButton;
     }
 
     static createTorch(container, x, y, frame = 0) {

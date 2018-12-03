@@ -5,7 +5,6 @@ let scenes = null;
 
 // Load textures
 PIXI.loader
-    .add("assets/atlases/atlas.json")
     .add(Params.atlases.hero.idle)
     .add(Params.atlases.hero.run)
     .add(Params.atlases.torch);
