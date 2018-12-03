@@ -155,7 +155,7 @@ const Params = {
         background: {
             start: PIXI.Texture.fromImage("assets/backgrounds/start.png"),
             tilingWall: PIXI.Texture.fromImage('assets/backgrounds/Game_Wall.png'),
-            tilingFloor: PIXI.Texture.fromImage('assets/backgrounds/Game_Floor.png'),
+            tilingFloor: PIXI.Texture.fromImage('assets/backgrounds/Game_floor.png'),
             gameUI: PIXI.Texture.fromImage('assets/backgrounds/ui_bg.png'),
             levelNumber: PIXI.Texture.fromImage('assets/backgrounds/Plashka_LevelNumber.png')
         },
