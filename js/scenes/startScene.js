@@ -69,28 +69,33 @@ class StartScene extends SceneBase {
             SM.playButton2();
         }
 
+        this.hideCurrentContainer();
+
         this.currentIndex++;
         if (this.currentIndex >= this.containers.length) {
+            this.hideCurrentContainer();
             this.switchCallback(Params.sceneType.MAIN, {});
         }
         else {
             this.updateContainer();
         }
-        
+
         if (this.currentIndex == 1) {
             SM.setFirePlay(true);
         }
     }
 
     updateContainer() {
-        if (this.currentContainer) {
-            this.currentContainer.visible = false;
-        }
-
         this.currentContainer = this.containers[this.currentIndex];
         this.currentContainer.container.visible = true;
 
         this.introText.text = this.currentContainer.text;
+    }
+
+    hideCurrentContainer() {
+        if (this.currentContainer) {
+            this.currentContainer.container.visible = false;
+        }
     }
 
     createContainer(data) {
