@@ -244,6 +244,8 @@ class MainScene extends SceneBase {
         this.currentBoss = new Boss(this.bossIndex);
         this.currentBoss.position.set(Params.application.width + 200, this.getUnitPositionY() - 10);
         this.bossContainer.addChild(this.currentBoss);
+
+        this.currentBoss.onDealDamage = (boss) => { this.hero.doReceiveHit() };
     }
 
     loseGame(chip) {

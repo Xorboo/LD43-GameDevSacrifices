@@ -64,9 +64,15 @@ class Hero extends PIXI.Container {
 
     doSacrifice() {
         this.startAnimation(this.heroSacrifice);
+        SM.playDoDamage();
     }
 
     doReceiveHit() {
+        var soundWaitTimer = PIXI.timerManager.createTimer(1000 * Params.bossAttackSoundDelay);
+        soundWaitTimer.on('end', (elapsed) => {
+            SM.playTakeDamage();
+        });
+        soundWaitTimer.start();
         this.startAnimation(this.heroHit);
     }
 
@@ -75,6 +81,15 @@ class Hero extends PIXI.Container {
 
         this.isWalking = true;
         var walkTimer = PIXI.timerManager.createTimer(1000 * walkTime);
+
+        let timeToStepSound = 0;
+        walkTimer.on('update', (elapsed, deltaTime) => {
+            timeToStepSound -= deltaTime;
+            if (timeToStepSound < 0) {
+                timeToStepSound = Params.stepPeriod;
+                SM.playStep();
+            }
+        })
         walkTimer.on('end', (elapsed) => { this.stopWalk(); });
         walkTimer.start();
     }

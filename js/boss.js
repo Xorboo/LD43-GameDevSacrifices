@@ -54,6 +54,9 @@ class Boss extends PIXI.Container {
         else {
             if (this.currentBoss == this.bossHit) {
                 this.startAnimation(this.bossAttack);
+                if (this.onDealDamage) {
+                    this.onDealDamage(this);
+                }
             }
             else {
                 this.startAnimation(this.bossIdle);

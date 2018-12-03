@@ -1,3 +1,38 @@
+class SoundPack {
+    constructor(prefix, amount) {
+        this.prefix = prefix;
+        this.amount = amount;
+    }
+
+    addToLoader() {
+        for (let i = 1; i <= this.amount; i++) {
+            const name = this.getName(i);
+            PIXI.loader.add(name, "assets/sounds/" + name + ".wav");
+        }
+    }
+
+    playRandom() {
+        const sound = this.getRandom();
+        sound.play();
+    }
+
+    getRandom() {
+        const index = this.getRandomInt(1, this.amount);
+        const name = this.getName(index);
+        return PIXI.loader.resources[name].sound
+    }
+
+    getName(index) {
+        return this.prefix + index;
+    }
+
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+}
+
 const Params = {
     application: {
         width: 800,
@@ -17,8 +52,10 @@ const Params = {
     extraWalkTime: 1,
     introWalkTime: 3,
     levelHeaderUpdateDelay: -1,
+    bossAttackSoundDelay: 0.7,
 
-    animationSpeed: 1/5,
+    stepPeriod: 4 / 12,      // every 4 frames
+    animationSpeed: 1/5,     // 12 fps
     downscaleFactor: 0.687,
 
     textStyle: {
@@ -129,7 +166,11 @@ const Params = {
     },
 
     sounds: {
-        bgMusic: "assets/music/LD43_Music.mp3"
+        bgMusic: "assets/music/LD43_Music.mp3",
+        button: "assets/sounds/button.wav",
+        steps: new SoundPack("step_", 6),
+        doDamage: new SoundPack("dmg_", 4),
+        takeDamage: new SoundPack("take_dmg_", 2)
     },
 
     text: {

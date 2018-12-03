@@ -27,7 +27,6 @@ const GameData = {
             "Loneliness",
             _ => GameData.chips.personalLife,
             _ => GameData.chips.depression,
-            true
         ),
 
         relationship: new Chip(

@@ -1,12 +1,33 @@
+SM = null;
+
 class SoundManager {
     constructor() {
-        /*this.bgMusic = PIXI.sound.Sound.from({
-            url: Params.sounds.bgMusic,
-            autoplay: true,
-            loop: true
-        });
-        this.bgMusic.Play();*/
-        PIXI.sound.add('bg', Params.sounds.bgMusic);
-        //PIXI.sound.play('bg');
+        SM = this;
+
+        this.bgMusic = PIXI.loader.resources["bgMusic"].sound;
+        this.bgMusic.loop = true;
+        this.bgMusic.play();
+
+        this.button = PIXI.loader.resources["button"].sound;
+    }
+
+    playStep() {
+        this.playRandom(Params.sounds.steps);
+    }
+
+    playDoDamage() {
+        this.playRandom(Params.sounds.doDamage);
+    }
+
+    playTakeDamage() {
+        this.playRandom(Params.sounds.takeDamage);
+    }
+
+    playButton() {
+        this.button.play();
+    }
+    
+    playRandom(soundPack) {
+        soundPack.playRandom();
     }
 }

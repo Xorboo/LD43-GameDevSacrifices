@@ -8,7 +8,6 @@ PIXI.loader
     .add("assets/atlases/atlas.json")
     .add(Params.atlases.hero.idle)
     .add(Params.atlases.hero.run);
-
 for (let i = 0; i < Params.atlases.bosses.length; i++) {
     const boss = Params.atlases.bosses[i];
     PIXI.loader
@@ -16,6 +15,13 @@ for (let i = 0; i < Params.atlases.bosses.length; i++) {
         .add(boss.hit)
         .add(boss.idle);
 }
+
+PIXI.loader
+    .add("bgMusic", Params.sounds.bgMusic)
+    .add("button", Params.sounds.button);
+Params.sounds.steps.addToLoader();
+Params.sounds.doDamage.addToLoader();
+Params.sounds.takeDamage.addToLoader();
 
 PIXI.loader.load(init);
 
