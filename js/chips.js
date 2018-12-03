@@ -310,7 +310,7 @@ const GameData = {
         ),
 
         stopAddictedLikes: new Chip(
-            "Stop being addicted to likes",
+            "Stop being a likes addict",
             _ => GameData.chips.freelancing,
             _ => GameData.chips.patreon,
         ),
@@ -322,7 +322,7 @@ const GameData = {
         ),
 
         increaseQuality: new Chip(
-            "Increase quality of the game",
+            "Increase game quality",
             _ => GameData.chips.developmentHell,
             _ => GameData.chips.forgetTheGame,
         ),
@@ -431,7 +431,7 @@ const GameData = {
         ),
 
         escapeFromPet: new Chip(
-            "Escape from someone else's pet-project",
+            "Escape from another's pet-project",
             _ => GameData.chips.sayNo,
             _ => GameData.chips.underestimated,
         ),
@@ -455,7 +455,7 @@ const GameData = {
         ),
 
         stopWatchingCeiling: new Chip(
-            "Stop looking at ceiling all weekend",
+            "Stop loafing all weekend",
             _ => GameData.chips.eyesWeekends,
             _ => GameData.chips.ceilingLooking,
         ),
@@ -481,7 +481,7 @@ const GameData = {
         ),
 
         everyoneAmateurs: new Chip(
-            "You think everyone as amateurs",
+            "You see everyone as amateurs",
         ),
 
         ownTeam: new Chip(
@@ -603,7 +603,7 @@ const GameData = {
         ),
 
         neverTellJob: new Chip(
-            "Never tell anyone about the job",
+            "Can't tell anyone about your job",
         ),
 
         pornBaron: new Chip(
@@ -661,9 +661,6 @@ const GameData = {
     handChipsCount: 8,
     bosses: [
         { health: 4 },
-        { health: 3 },
-        { health: 6 },
-        { health: 5 },
     ],
 
     shuffle: function(a) {
@@ -687,7 +684,6 @@ const GameData = {
             this.chips.gamejam,
             this.chips.readMore,
             this.chips.activeRest,
-            // TODO Add all starting chips here
         ];
         return this.shuffle(chipsOnHand);
     },

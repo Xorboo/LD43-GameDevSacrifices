@@ -2,10 +2,12 @@ class FinishScene extends SceneBase {
     constructor(switchCallback) {
         super(switchCallback, null);
 
+
         this.headerText = new PIXI.Text("You've made a game!", Params.textStyle.finishHeader);
         this.headerText.anchor.set(0.5);
         this.headerText.position.set(Params.application.width / 2, 150);
         this.addChild(this.headerText);
+
         this.hintText = new PIXI.Text("But at what cost?", Params.textStyle.finishHint);
         this.hintText.anchor.set(0.5);
         this.hintText.position.set(Params.application.width / 2, 190);
@@ -14,7 +16,9 @@ class FinishScene extends SceneBase {
         this.addFullscreenButton(() => {
             SM.playButton2();
             this.switchCallback(Params.sceneType.START, {});
-        })
+        });
+
+        this.addCredits();
 
         this.perks = [];
     }

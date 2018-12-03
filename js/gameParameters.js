@@ -30,6 +30,21 @@ const Params = {
     chipButtonHeight: 28,
 
     textStyle: {
+        credits: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 20,
+            fill: "#999999",
+            align: "left"
+        }),
+        creditsHover: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 21,
+            fill: "#999999",
+            stroke: "black",
+            strokeThickness: 4,
+            align: "left",
+        }),
+
         failHeader: new PIXI.TextStyle({
             fontFamily: "Plain_Germanica",
             fontSize: 64,
@@ -38,9 +53,15 @@ const Params = {
             strokeThickness: 6,
             align: "center"
         }),
+        failHint: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 30,
+            fill: "black",
+            align: "center"
+        }),
         loseDescription: new PIXI.TextStyle({
-            fontFamily: "DeathtoMetal",
-            fontSize: 80,
+            fontFamily: "Deutsch",
+            fontSize: 96,
             fill: "black",
         }),
 
@@ -106,8 +127,10 @@ const Params = {
         }),
         chipLose: new PIXI.TextStyle({
             fontFamily: "Deutsch",
-            fontSize: 24,
+            fontSize: 28,
             fill: "#661111",
+            stroke: "black",
+            strokeThickness: 2,
         }),
 
         test: new PIXI.TextStyle({
@@ -121,18 +144,6 @@ const Params = {
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
-        }),
-        buttonNormal: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 30,
-            fill: "white"
-        }),
-        buttonHover: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 30,
-            fill: "white",
-            stroke: "black",
-            strokeThickness: 4,
         }),
     },
 
@@ -205,5 +216,13 @@ const Params = {
             run: "assets/atlases/hero/Rudolf_Run.json"
         },
         torch: "assets/atlases/FireTorch.json"
-    }
+    },
+
+    credits: [
+        ["@Xorboo - Kirill Korepanov", "https://twitter.com/Xorboo"],
+        ["@nec_neca - nEc neca", "https://twitter.com/nec_neca"],
+        ["@Mazokpixels - Evgeniy Yudin", "https://twitter.com/Mazokpixels"],
+        ["@GerodruS - Viktor Smirnov", "https://twitter.com/GerodruS"],
+        ["@NikolsaNNN - Nikolay Sambosrky", "https://twitter.com/NikolsaNNN"]
+    ]
 }

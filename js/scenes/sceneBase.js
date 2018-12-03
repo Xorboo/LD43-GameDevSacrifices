@@ -21,6 +21,30 @@ class SceneBase extends PIXI.Container {
     update(deltaTime) {
     }
 
+    addCredits() {
+        const credits = Params.credits;
+        const shift = 25;
+        const x = 10
+        let y = Params.application.height - credits.length * shift + 5;
+
+        for (let i = 0; i < credits.length; i++) {
+            const credit = credits[i];
+            this.addCreditsLine(credit[0], credit[1], x, y);
+            y += shift;
+        }
+    }
+
+    addCreditsLine(text, url, x, y) {
+        let line = new BaseTextButton(null, null, text, Params.textStyle.credits, Params.textStyle.creditsHover);
+        line.text.anchor.set(0.0, 0.5);
+        line.position.set(x, y);
+        line.onClick(() => {
+            SM.playButton2();
+            window.open(url, "_blank");
+        });
+        this.addChild(line);
+    }
+
     addFullscreenButton(callback) {
         let fullscreenButton = new BaseTextButton(Params.textures.button.normal);
         fullscreenButton.button.alpha = 0;

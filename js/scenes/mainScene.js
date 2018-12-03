@@ -144,7 +144,7 @@ class MainScene extends SceneBase {
         this.disableChipsFor(Params.introWalkTime);
         this.animateCoreMovement(Params.introWalkTime);
     }
-    
+
     moveToNextBoss() {
         // Check for game over
         let killedBossIndex = this.bossIndex;

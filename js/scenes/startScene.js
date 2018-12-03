@@ -47,7 +47,7 @@ class StartScene extends SceneBase {
         this.addFullscreenButton(() => {
             SM.playButton2();
             this.showNextContainer();
-        })
+        });
     }
 
     init(data) {
