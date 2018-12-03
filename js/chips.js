@@ -527,6 +527,112 @@ const GameData = {
         stillWorkaholic: new Chip(
             "You are still a workaholic",
         ),
+
+        // readmore
+        readMore: new Chip(
+            "Read more",
+            _ => GameData.chips.fromBook,
+            _ => GameData.chips.wtos,
+        ),
+
+        wtos: new Chip(
+            "Combine words into sentences",
+            _ => GameData.chips.readMore,
+            _ => GameData.chips.ctow,
+        ),
+
+        fromBook: new Chip(
+            "Get inspiration from books",
+            _ => GameData.chips.strongPlot,
+            _ => GameData.chips.pornPlot,
+        ),
+
+        ctow: new Chip(
+            "Combine characters into words",
+            _ => GameData.chips.noSayShow,
+            _ => GameData.chips.wtos,
+        ),
+
+        pornPlot: new Chip(
+            "Make plot not like in porn",
+            _ => GameData.chips.forChildren,
+            _ => GameData.chips.adultGame,
+        ),
+
+        strongPlot: new Chip(
+            "Make a strong plot",
+            _ => GameData.chips.pilesText,
+            _ => GameData.chips.crossMedia,
+        ),
+
+        noSayShow: new Chip(
+            "Not to say, but show",
+            _ => GameData.chips.buildTheories,
+            _ => GameData.chips.bessWordLess,
+        ),
+
+        adultGame: new Chip(
+            "Make adult-game",
+            _ => GameData.chips.neverTellJob,
+            _ => GameData.chips.pornBaron,
+        ),
+
+        forChildren: new Chip(
+            "Make a game for children",
+            _ => GameData.chips.childrenHate,
+            _ => GameData.chips.adultsLike,
+        ),
+
+        pilesText: new Chip(
+            "Remove piles of text",
+            _ => GameData.chips.nobodyPlot,
+            _ => GameData.chips.wiki,
+        ),
+        crossMedia: new Chip(
+            "Cross-media project",
+            _ => GameData.chips.uweBoll,
+            _ => GameData.chips.newBookSeries,
+        ),
+
+        buildTheories: new Chip(
+            "Players understand nothing, but build theories",
+        ),
+
+        bessWordLess: new Chip(
+            "Best word-less expirence",
+        ),
+
+        neverTellJob: new Chip(
+            "Never tell anyone about the job",
+        ),
+
+        pornBaron: new Chip(
+            "Become a porn baron",
+        ),
+
+        childrenHate: new Chip(
+            "Children hate your game",
+        ),
+
+        adultsLike: new Chip(
+            "Adults like your game",
+        ),
+
+        nobodyPlot: new Chip(
+            "Nobody know plot of the game",
+        ),
+
+        wiki: new Chip(
+            "Fanats creating a wiki",
+        ),
+
+        uweBoll: new Chip(
+            "Uwe Boll adapting your game",
+        ),
+
+        newBookSeries: new Chip(
+            "New book series inspired your game",
+        ),
     },
     handChipsCount: 8,
     bosses: [
@@ -543,6 +649,7 @@ const GameData = {
             this.chips.vacation,
             this.chips.buildPortfolio,
             this.chips.gamejam,
+            this.chips.readmore,
             // TODO Add all starting chips here
         ];
     },
