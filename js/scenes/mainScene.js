@@ -187,6 +187,8 @@ class MainScene extends SceneBase {
             }
         }
         else {
+            this.animateCoreMovement(animationLength, false);
+
             // Finished the game wait for buttons evolution and show final screen
             var finishGameTimer = PIXI.timerManager.createTimer(1000 * animationLength);
             finishGameTimer.on('end', (elapsed) => { this.finishGame(); });
@@ -224,9 +226,11 @@ class MainScene extends SceneBase {
         enableChipsTimer.start();
     }
 
-    animateCoreMovement(animationLength) {
+    animateCoreMovement(animationLength, animateNewBoss = true) {
         this.hero.startWalk(animationLength);
-        this.currentBoss.doWalk(this.getDesiredBossPosition(), animationLength);
+        if (animateNewBoss) {
+            this.currentBoss.doWalk(this.getDesiredBossPosition(), animationLength);
+        }
 
         var coreTimer = PIXI.timerManager.createTimer(1000 * animationLength);
         coreTimer.on('update', (elapsed, deltaTime) => {
