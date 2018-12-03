@@ -649,7 +649,7 @@ const GameData = {
             this.chips.vacation,
             this.chips.buildPortfolio,
             this.chips.gamejam,
-            this.chips.readmore,
+            this.chips.readMore,
             // TODO Add all starting chips here
         ];
     },
