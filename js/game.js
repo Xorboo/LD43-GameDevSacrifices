@@ -3,7 +3,7 @@ const initialScene = Params.sceneType.START;
 let currentScene = null;
 let scenes = null;
 
-// TODO: loading everything here
+// Load textures
 PIXI.loader
     .add("assets/atlases/atlas.json")
     .add(Params.atlases.hero.idle)
@@ -17,19 +17,17 @@ for (let i = 0; i < Params.atlases.bosses.length; i++) {
         .add(boss.idle);
 }
 
-PIXI.loader
-    .add("bgMusic", Params.sounds.bgMusic)
-    .add("button", Params.sounds.button);
-Params.sounds.steps.addToLoader();
-Params.sounds.doDamage.addToLoader();
-Params.sounds.takeDamage.addToLoader();
-
+// Load sounds
+SoundManager.preloadSounds();
 PIXI.loader.load(init);
+
 
 function init() {
     // Basic initialization
     const app = new PIXI.Application(Params.application);
     document.body.appendChild(app.view);
+
+    this.soundManager = new SoundManager();
 
     // Initialize scenes
     scenes = {
@@ -45,8 +43,6 @@ function init() {
         scene.visible = false;
     }
     switchScene(Params.sceneType.START, {});
-
-    this.soundManager = new SoundManager();
 
     // Add frame ticker
     app.ticker.add(delta => update(delta * 16 / 1000));

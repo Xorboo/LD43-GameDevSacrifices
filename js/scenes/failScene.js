@@ -4,7 +4,10 @@ class FailScene extends SceneBase {
         
         let restartButton = new TextButton(Params.text.button_restart);
         restartButton.position.set(Params.application.width - 120, Params.application.height - 50);
-        restartButton.onClick(() => this.switchCallback(Params.sceneType.START, {}));
+        restartButton.onClick(() => {
+            SM.playButton1();
+            this.switchCallback(Params.sceneType.START, {});
+        });
         this.addChild(restartButton);
 
         this.reasonText = new PIXI.Text("???", Params.textStyle.loseDescription);
@@ -15,6 +18,9 @@ class FailScene extends SceneBase {
 
     init(data) {
         super.init(data);
+
+        SM.playGameOver();
+        SM.setFirePlay(false);
 
         this.reasonText.text = data.loseChip.text;
     }

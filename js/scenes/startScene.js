@@ -10,7 +10,7 @@ class StartScene extends SceneBase {
         this.createContainer({
             bg: "Backgrouns_screen1_start.png",
             text: "I always wanted\nto make a game...",
-            addExtra: function(container) {
+            addExtra: function (container) {
                 let heroSprite = new PIXI.Sprite(Params.textures.intro.hero);
                 heroSprite.anchor.set(0.5);
                 heroSprite.position.set(Params.application.width - 230, Params.application.height - 160);
@@ -20,7 +20,7 @@ class StartScene extends SceneBase {
         this.createContainer({
             bg: "Backgrouns_screen1_closed door.png",
             text: "But it wasn't\nas easy as I thought...",
-            addExtra: function(container) {
+            addExtra: function (container) {
                 StartScene.addHero(container);
                 StartScene.addTorches(container);
             }
@@ -28,7 +28,7 @@ class StartScene extends SceneBase {
         this.createContainer({
             bg: "Backgrouns_screen1.png",
             text: "Sacrifices\nhad to be made...",
-            addExtra: function(container) {
+            addExtra: function (container) {
                 StartScene.addHero(container);
                 StartScene.addTorches(container);
             }
@@ -43,17 +43,6 @@ class StartScene extends SceneBase {
         this.introText.anchor.set(0.5);
         this.introText.position.y = -40;
         textPanelSprite.addChild(this.introText);
-        /*const leftFireAnimation = StartScene.getFireAnimation();
-        leftFireAnimation.play();
-        leftFireAnimation.x = 100;
-        leftFireAnimation.y = Params.application.height - 125;
-        this.addChild(leftFireAnimation);
-
-        const rightFireAnimation = StartScene.getFireAnimation();
-        rightFireAnimation.play();
-        rightFireAnimation.x = Params.application.width - 100;
-        rightFireAnimation.y = Params.application.height - 125;
-        this.addChild(rightFireAnimation);*/
 
         let nextButton = new BaseTextButton(Params.textures.button.normal);
         nextButton.onClick(() => this.showNextContainer());
@@ -67,20 +56,29 @@ class StartScene extends SceneBase {
         super.init(data);
 
         this.currentIndex = -1;
-        this.showNextContainer();
+        SM.setFirePlay(false);
+        this.showNextContainer(false);
     }
 
     update(deltaTime) {
         super.update(deltaTime);
     }
 
-    showNextContainer() {
+    showNextContainer(playSound = true) {
+        if (playSound) {
+            SM.playButton2();
+        }
+
         this.currentIndex++;
         if (this.currentIndex >= this.containers.length) {
             this.switchCallback(Params.sceneType.MAIN, {});
         }
         else {
             this.updateContainer();
+        }
+        
+        if (this.currentIndex == 1) {
+            SM.setFirePlay(true);
         }
     }
 
@@ -134,41 +132,11 @@ class StartScene extends SceneBase {
         torchesContainer.position.set(Params.application.width - 30, Params.application.height + 55);
         container.addChild(torchesContainer);
 
-        StartScene.createTorch(torchesContainer, -455, -175, 0);
-        StartScene.createTorch(torchesContainer, -80, -168, 6);
+        SceneBase.createTorch(torchesContainer, -455, -180, 0);
+        SceneBase.createTorch(torchesContainer, -80, -175, 6);
         let baseSprite = new PIXI.Sprite(Params.textures.intro.torchBase);
         baseSprite.anchor.set(1.0);
         torchesContainer.addChild(baseSprite);
-        
-    }
 
-    static createTorch(container, x, y, frame) {
-        const sheetName = Params.atlases.torch;
-        const sheet = PIXI.loader.resources[sheetName].spritesheet;
-        const animation = sheet.animations["Fire_torch"];
-        let torchSprite = new PIXI.extras.AnimatedSprite(animation);
-        torchSprite.scale.set(Params.downscaleFactor);
-        torchSprite.anchor.set(0.5);
-        torchSprite.position.set(x, y);
-        torchSprite.animationSpeed = Params.animationSpeed;
-        torchSprite.loop = true;
-        torchSprite.gotoAndPlay(frame);
-
-        container.addChild(torchSprite);
-    }
-
-    static getFireAnimation() {
-        const framesCount = 12;
-        const frames = new Array(framesCount);
-        for (let i = 1, n = Math.min(9, framesCount); i <= n; ++i) {
-            frames[i - 1] = PIXI.Texture.fromFrame('Fire_torch000' + i + '.png');
-        }
-        for (let i = 10; i <= framesCount; ++i) {
-            frames[i - 1] = PIXI.Texture.fromFrame('Fire_torch00' + i + '.png');
-        }
-        const animatedSprite = new PIXI.extras.AnimatedSprite(frames);
-        animatedSprite.anchor.set(0.5);
-        animatedSprite.animationSpeed = 1 / 4;
-        return animatedSprite;
     }
 }

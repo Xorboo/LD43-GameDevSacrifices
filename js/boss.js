@@ -69,6 +69,7 @@ class Boss extends PIXI.Container {
         this.health = newHealth;
 
         if (this.isDead()) {
+            SM.playBossDeath();
             this.startAnimation(this.bossDie);
         } 
         else {

@@ -4,7 +4,10 @@ class FinishScene extends SceneBase {
 
         let restartButton = new TextButton(Params.text.button_restart);
         restartButton.position.set(Params.application.width - 120, Params.application.height - 50);
-        restartButton.onClick(() => this.switchCallback(Params.sceneType.START, {}));
+        restartButton.onClick(() => {
+            SM.playButton1();
+            this.switchCallback(Params.sceneType.START, {});
+        });
         this.addChild(restartButton);
 
         this.headerText = new PIXI.Text("You've made a game!", Params.textStyle.finalHeader);
@@ -18,6 +21,9 @@ class FinishScene extends SceneBase {
     init(data) {
         super.init(data);
 
+        SM.playGameWin();
+        SM.setFirePlay(false);
+        
         this.clearPerks();
         for (let chipKey in data.finalChips) {
             this.addPerk(data.finalChips[chipKey]);

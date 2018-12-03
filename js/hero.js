@@ -23,6 +23,8 @@ class Hero extends PIXI.Container {
         this.isWalking = false;
         this.isDead = false;
         this.isWin = false;
+
+        this.text.text = "";
     }
 
     createSprite(sheetName, animationName, loop) {
@@ -68,11 +70,7 @@ class Hero extends PIXI.Container {
     }
 
     doReceiveHit() {
-        var soundWaitTimer = PIXI.timerManager.createTimer(1000 * Params.bossAttackSoundDelay);
-        soundWaitTimer.on('end', (elapsed) => {
-            SM.playTakeDamage();
-        });
-        soundWaitTimer.start();
+        SM.playTakeDamage();
         this.startAnimation(this.heroHit);
     }
 

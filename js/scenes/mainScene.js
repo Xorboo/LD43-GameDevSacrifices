@@ -29,7 +29,9 @@ class MainScene extends SceneBase {
         this.gameContainer.addChild(this.bossContainer);
 
         // UI background
-        // TODO Spawn fire
+        const torchY = Params.application.height - 175;
+        SceneBase.createTorch(this, 65, torchY, 0);
+        SceneBase.createTorch(this, Params.application.width - 50, torchY, 3);
         this.uiBackground = new PIXI.Sprite(Params.textures.background.gameUI);
         this.uiBackground.width = Params.application.width;
         this.uiBackground.height = Params.application.height;
@@ -100,6 +102,8 @@ class MainScene extends SceneBase {
     }
 
     onChipClicked(damage, chip) {
+        SM.playButton1();
+
         this.currentBoss.receiveDamage(damage);
         console.log("Boss damaged on " + damage + ", hp left: " + this.currentBoss.health);
 
@@ -107,7 +111,14 @@ class MainScene extends SceneBase {
 
         if (this.currentBoss.isDead()) {
             console.log("Boss defeated");
-            this.moveToNextBoss();
+
+            // Disable player actions
+            this.setChipButtonsEnabled(false);
+            var delayTimer = PIXI.timerManager.createTimer(1000 * Params.afterKillDelay);
+            delayTimer.on('end', (elapsed) => {
+                this.moveToNextBoss();
+            });
+            delayTimer.start();
         }
     }
 
@@ -133,7 +144,7 @@ class MainScene extends SceneBase {
         this.disableChipsFor(Params.introWalkTime);
         this.animateCoreMovement(Params.introWalkTime);
     }
-
+    
     moveToNextBoss() {
         // Check for game over
         let killedBossIndex = this.bossIndex;
@@ -196,6 +207,16 @@ class MainScene extends SceneBase {
         }
     }
 
+    setChipButtonsEnabled(isEnabled) {
+        for (let i = 0; i < this.chipsButtons.length; i++) {
+            const chipButton = this.chipsButtons[i];
+            chipButton.interactive = isEnabled;
+            if (!isEnabled) {
+                chipButton.setNormalTextStyle();
+            }
+        }
+    }
+
     updateBossIndex(delay) {
         const levelStrings = ["ONE", "TWO", "THREE", "FOUR"];
         const updateFunc = () => this.levelHeader.text = "LEVEL " + levelStrings[Math.min(this.bossIndex, levelStrings.length - 1)];
@@ -211,17 +232,11 @@ class MainScene extends SceneBase {
     }
 
     disableChipsFor(animationLength) {
-        for (let i = 0; i < this.chipsButtons.length; i++) {
-            const chipButton = this.chipsButtons[i];
-            chipButton.interactive = false;
-            chipButton.setNormalTextStyle();
-        }
+        this.setChipButtonsEnabled(false);
 
         var enableChipsTimer = PIXI.timerManager.createTimer(1000 * animationLength);
         enableChipsTimer.on('end', (elapsed) => {
-            for (let i = 0; i < this.chipsButtons.length; i++) {
-                this.chipsButtons[i].interactive = true;
-            }
+            this.setChipButtonsEnabled(true);
         });
         enableChipsTimer.start();
     }

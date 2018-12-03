@@ -12,12 +12,15 @@ const Params = {
         FINISH: 4
     },
 
-    shiftSpeed: 200,
+    shiftSpeed: 300,
     chipEvolvePause: 0.4,
     extraWalkTime: 1,
     introWalkTime: 3,
     levelHeaderUpdateDelay: -1,
     bossAttackSoundDelay: 0.7,
+    bossDeathSoundDelay: 0.5,
+    hitSoundDelay: 0.2,
+    afterKillDelay: 1.0,
 
     stepPeriod: 4 / 12,      // every 4 frames
     animationSpeed: 1/5,     // 12 fps
@@ -143,7 +146,12 @@ const Params = {
 
     sounds: {
         bgMusic: "assets/music/LD43_Music.mp3",
-        button: "assets/sounds/button.wav",
+        button1: "assets/sounds/Button_1.wav",
+        button2: "assets/sounds/Button_2.wav",
+        bossDeath: "assets/sounds/Monster_die.wav",
+        gameOver: "assets/sounds/Dark_lose.wav",
+        win: "assets/sounds/Win.wav",
+        fire: "assets/sounds/Fire.wav",
         steps: new SoundPack("step_", 6),
         doDamage: new SoundPack("dmg_", 4),
         takeDamage: new SoundPack("take_dmg_", 2)
