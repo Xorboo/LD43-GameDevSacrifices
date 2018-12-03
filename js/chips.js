@@ -27,6 +27,7 @@ const GameData = {
             "Loneliness",
             _ => GameData.chips.personalLife,
             _ => GameData.chips.depression,
+            true
         ),
 
         relationship: new Chip(
@@ -96,7 +97,7 @@ const GameData = {
         ),
 
         stopHikikomori: new Chip(
-            "Stop to be a hikikomori",
+            "Stop being a hikikomori",
             _ => GameData.chips.socialLife,
             _ => GameData.chips.howTalkPeople,
         ),
@@ -114,7 +115,7 @@ const GameData = {
         ),
 
         findTimeForConnections: new Chip(
-            "Find time for all connections",
+            "Find time for connections",
             _ => GameData.chips.workCommunity,
             _ => GameData.chips.optimizeConnections,
         ),
@@ -132,7 +133,7 @@ const GameData = {
         ),
 
         stopMisanthrope: new Chip(
-            "Stop to be a misanthrope",
+            "Stop being a misanthrope",
             _ => GameData.chips.harassmentCharges,
             _ => GameData.chips.noWorkWithAnyone,
         ),
@@ -310,7 +311,7 @@ const GameData = {
         ),
 
         stopAddictedLikes: new Chip(
-            "Stop to be addicted to likes",
+            "Stop being addicted to likes",
             _ => GameData.chips.freelancing,
             _ => GameData.chips.patreon,
         ),
@@ -401,7 +402,7 @@ const GameData = {
         ),
 
         stopWork7: new Chip(
-            "Stop to work 7 days a week",
+            "Stop working 7 days a week",
             _ => GameData.chips.useFreeTime,
             _ => GameData.chips.beatWorkaholism,
         ),
@@ -467,7 +468,7 @@ const GameData = {
         ),
 
         stopProcrastination: new Chip(
-            "Stop to procrastination",
+            "Stop procrastinating",
             _ => GameData.chips.stillWorkaholic,
             _ => GameData.chips.youFired,
         ),
@@ -528,7 +529,7 @@ const GameData = {
             "You are still a workaholic",
         ),
     },
-    handChipsCount: 16,
+    handChipsCount: 8,
     bosses: [
         { health: 1 },
         { health: 2 },
@@ -543,7 +544,7 @@ const GameData = {
             this.chips.vacation,
             this.chips.buildPortfolio,
             this.chips.gamejam,
-            // TODO Add all 16 here
+            // TODO Add all starting chips here
         ];
     },
 

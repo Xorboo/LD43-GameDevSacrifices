@@ -4,8 +4,8 @@ class ChipButton extends BaseTextButton {
             Params.textures.button.normal,
             Params.textures.button.pressed,
             "???",
-            Params.textStyle.buttonNormal,
-            Params.textStyle.buttonHover);
+            Params.textStyle.chip,
+            Params.textStyle.chipHover);
         this.button.alpha = 0.0;
         this.onClick(this.chipClicked);
         this.chipClickedCallback = onChipClickedCallback;
@@ -19,17 +19,29 @@ class ChipButton extends BaseTextButton {
         this.chip = chip;
         this.text.text = chip.text;
         this.setSacrificed(false);
+
+        this.normalTextStyle = Params.textStyle.chip;
+        this.hoveredTextStyle = Params.textStyle.chipHover;
+
+        // Game over chip special coloring
+        if (this.chip.gameOver) {
+            this.normalTextStyle = this.hoveredTextStyle = Params.textStyle.chipLose;
+        }
+        this.updateTextStyle();
+    }
+
+    getNextChip(bossIndex) {
+        const evolveFunc = this.isSacrificed ? this.chip.onSacrifice : this.chip.onStay;
+        return evolveFunc(bossIndex);
     }
 
     evolveChip(bossIndex) {
-        const evolveFunc = this.isSacrificed ? this.chip.onSacrifice : this.chip.onStay;
-        const newChip = evolveFunc(bossIndex);
+        let newChip = this.getNextChip(bossIndex);
         if (!newChip) {
             console.error("Failed in evolving chip on [" + bossIndex + "], was sacrificed: " + this.isSacrificed + ", data:");
             console.log(this.chip);
             newChip = chip;
         }
-        console.log(this.isSacrificed + " : " + this.chip.text + " -> " + newChip.text);
         this.setChip(newChip);
     }
 
@@ -42,6 +54,10 @@ class ChipButton extends BaseTextButton {
 
         this.setSacrificed(true);
 
+        this.normalTextStyle = Params.textStyle.chipSacrificed;
+        this.hoveredTextStyle = Params.textStyle.chipSacrificed;
+        super.updateTextStyle();
+
         const chipDamage = 1;
         this.chipClickedCallback(chipDamage, this.chip);
     }
@@ -49,10 +65,8 @@ class ChipButton extends BaseTextButton {
     setSacrificed(sacrificed) {
         this.isSacrificed = sacrificed;
         this.interactive = !sacrificed;
-        // TODO Update text style
-
-        if (this.chip.gameOver) {
-            // TODO Special style needed?
+        if (sacrificed) {
+            this.isOver = false;
         }
     }
 }

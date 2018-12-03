@@ -1,13 +1,65 @@
 class MainScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, Params.textures.background.start);
+        super(switchCallback, null);
 
+        // Add background
+        const wallShift = 10, wallHeight = 221;
+        this.tilingBackground = new PIXI.extras.TilingSprite(
+            Params.textures.background.tilingWall,
+            Params.application.width,
+            wallHeight
+        );
+        this.tilingBackground.position.y = wallShift
+        this.addChild(this.tilingBackground);
+
+        this.tilingFloor = new PIXI.extras.TilingSprite(
+            Params.textures.background.tilingFloor,
+            Params.application.width,
+            143
+        );
+        this.tilingFloor.position.y = this.tilingBackground.position.y + wallHeight
+        this.addChild(this.tilingFloor);
+
+        // Middle container
+        this.gameContainer = new PIXI.Container();
+        this.addChild(this.gameContainer);
+
+        // Boss container
+        this.bossContainer = new PIXI.Container();
+        this.gameContainer.addChild(this.bossContainer);
+
+        // UI background
+        // TODO Spawn fire
+        this.uiBackground = new PIXI.Sprite(Params.textures.background.gameUI);
+        this.uiBackground.width = Params.application.width;
+        this.uiBackground.height = Params.application.height;
+        this.addChild(this.uiBackground);
+
+        // Top panel
+        this.levelNumberSprite = new PIXI.Sprite(Params.textures.background.levelNumber);
+        this.levelNumberSprite.anchor.set(0.5, 0.0);
+        this.levelNumberSprite.position.set(Params.application.width / 2, 15);
+        this.addChild(this.levelNumberSprite);
+
+        this.levelHeader = new PIXI.Text("???", Params.textStyle.levelHeader);
+        this.levelHeader.anchor.set(0.5);
+        this.levelHeader.position.set(0.0, 40.0);
+        this.levelNumberSprite.addChild(this.levelHeader);
+
+        // Sacrifice text
+        this.sacrificeHeader = new PIXI.Text("Sacrifice", Params.textStyle.sacrifice);
+        this.sacrificeHeader.anchor.set(0.5);
+        this.sacrificeHeader.position.set(Params.application.width / 2, Params.application.height - 177);
+        this.addChild(this.sacrificeHeader);
+
+
+        // Spawn chips
         const chipsCount = GameData.handChipsCount;
-        const width = 195;
-        const height = 52;
-        const elementsPerRow = 4;
+        const width = 280;
+        const height = 28;
+        const elementsPerRow = 2;
         const startX = Params.application.width / 2 - width * (elementsPerRow / 2 - 0.5);
-        const startY = Params.application.height - height * (chipsCount / elementsPerRow);
+        const startY = Params.application.height - 135;
 
         this.chipsButtons = [];
         for (let i = 0; i < chipsCount; ++i) {
@@ -18,16 +70,29 @@ class MainScene extends SceneBase {
             this.chipsButtons.push(chipButton);
         }
 
+        // Add hero
         this.hero = new Hero();
-        this.hero.position.set(100, Params.application.height / 2 - 100);
-        this.addChild(this.hero);
+        this.hero.position.set(this.getUnitShiftX(), this.getUnitPositionY());
+        this.gameContainer.addChild(this.hero);
     }
 
     init(data) {
         super.init(data);
 
+        // Init everything
+        this.hero.init();
         this.updateChipButtons();
+
+        // Start game logic
         this.startGame();
+    }
+
+    getUnitPositionY() {
+        return Params.application.height / 2 - 45;
+    }
+
+    getUnitShiftX() {
+        return 175;
     }
 
     update(deltaTime) {
@@ -57,8 +122,9 @@ class MainScene extends SceneBase {
         if (this.currentBoss) {
             this.removeChild(this.currentBoss);
         }
-        
+
         this.bossIndex = 0;
+        this.updateBossIndex(0.0);
         this.initBoss();
 
         // Start first movement animation
@@ -69,20 +135,24 @@ class MainScene extends SceneBase {
     }
 
     moveToNextBoss() {
-        // Evolve buttons animation
-        this.hasGameOverChip = false;
+        // Check for game over
         let killedBossIndex = this.bossIndex;
+        this.hasGameOverChip = false;
+        for (let i = 0; i < this.chipsButtons.length; i++) {
+            const nextChip = this.chipsButtons[i].getNextChip(killedBossIndex);
+            if (nextChip && nextChip.gameOver) {
+                this.hasGameOverChip = true;
+                this.gameOverChip = nextChip;
+            }
+        }
+
+        // Evolve buttons animation
         var evolveTimer = PIXI.timerManager.createTimer(1000 * Params.chipEvolvePause);
         evolveTimer.repeat = this.chipsButtons.length;
         evolveTimer.on('repeat', (elapsed, repeat) => {
-            const chipButton = this.chipsButtons[repeat - 1];
+            const chipButton = this.chipsButtons[repeat + Params.levelHeaderUpdateDelay];
             chipButton.evolveChip(killedBossIndex);
             chipButton.interactive = false;
-
-            if (chipButton.chip.gameOver) {
-                this.hasGameOverChip = true;
-                this.gameOverChip = chipButton.chip;
-            }
         });
         evolveTimer.start();
 
@@ -97,31 +167,52 @@ class MainScene extends SceneBase {
 
         // Spawn new boss if needed
         this.bossIndex++;
+        this.updateBossIndex(animationLength - 1.0);
+
+        // If we have more bosses to fight
         if (this.bossIndex < GameData.bosses.length) {
             // Create new boss and move him
-            this.initBoss();
+            if (!this.hasGameOverChip) {
+                this.initBoss();
+            }
             this.animateCoreMovement(animationLength);
+
+            // Check if we evolved to a game over chip
+            if (this.hasGameOverChip) {
+                var checkGameOverTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+                checkGameOverTimer.on('end', (elapsed) => {
+                    this.loseGame(this.gameOverChip);
+                });
+                checkGameOverTimer.start();
+            }
         }
         else {
-            // Wait for buttons evolution and show final screen
+            // Finished the game wait for buttons evolution and show final screen
             var finishGameTimer = PIXI.timerManager.createTimer(1000 * animationLength);
             finishGameTimer.on('end', (elapsed) => { this.finishGame(); });
             finishGameTimer.start();
         }
+    }
 
-        // Check if we evolved to a game over chip
-        var checkGameOverTimer = PIXI.timerManager.createTimer(1000 * animationLength);
-        checkGameOverTimer.on('end', (elapsed) => {
-            if (this.hasGameOverChip) {
-                this.loseGame(this.gameOverChip);
-            }
-        });
-        checkGameOverTimer.start();
+    updateBossIndex(delay) {
+        const levelStrings = ["ONE", "TWO", "THREE", "FOUR"];
+        const updateFunc = () => this.levelHeader.text = "LEVEL " + levelStrings[Math.min(this.bossIndex, levelStrings.length - 1)];
+
+        if (delay > 0) {
+            var delayTimer = PIXI.timerManager.createTimer(1000 * delay);
+            delayTimer.on('end', elapsed => { updateFunc(); });
+            delayTimer.start();
+        }
+        else {
+            updateFunc();
+        }
     }
 
     disableChipsFor(animationLength) {
         for (let i = 0; i < this.chipsButtons.length; i++) {
-            this.chipsButtons[i].interactive = false;
+            const chipButton = this.chipsButtons[i];
+            chipButton.interactive = false;
+            chipButton.setNormalTextStyle();
         }
 
         var enableChipsTimer = PIXI.timerManager.createTimer(1000 * animationLength);
@@ -136,23 +227,29 @@ class MainScene extends SceneBase {
     animateCoreMovement(animationLength) {
         this.hero.startWalk(animationLength);
         this.currentBoss.doWalk(this.getDesiredBossPosition(), animationLength);
-        // TODO: move background
+
+        var coreTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+        coreTimer.on('update', (elapsed, deltaTime) => {
+            this.tilingBackground.tilePosition.x -= Params.shiftSpeed * deltaTime;
+            this.tilingFloor.tilePosition.x -= Params.shiftSpeed * deltaTime;
+        });
+        coreTimer.start();
     }
 
     getDesiredBossPosition() {
-        return Params.application.width - 100;
+        return Params.application.width - this.getUnitShiftX();
     }
 
     initBoss() {
-        this.currentBoss = new Boss(GameData.bosses[this.bossIndex]);
-        this.currentBoss.position.set(Params.application.width + 200, Params.application.height / 2 - 100);
-        this.addChild(this.currentBoss);
-        console.log("New boss, hp: " + this.currentBoss.health);
+        this.currentBoss = new Boss(this.bossIndex);
+        this.currentBoss.position.set(Params.application.width + 200, this.getUnitPositionY() - 10);
+        this.bossContainer.addChild(this.currentBoss);
     }
 
     loseGame(chip) {
         this.hero.doDeath();
 
+        // TODO Add pause if we have hero animation
         this.switchCallback(Params.sceneType.FAIL, {
             loseChip: chip
         });
@@ -161,6 +258,7 @@ class MainScene extends SceneBase {
     finishGame() {
         this.hero.doWin();
 
+        // TODO Add pause if we have hero animation
         let finalState = {
             finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
         };

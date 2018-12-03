@@ -46,6 +46,22 @@ class BaseTextButton extends PIXI.Container {
             this.dirty = true;
         }
     }
+    updateTextStyle() {
+        if (this.isOver) {
+            this.setHoveredTextStyle();
+        }
+        else {
+            this.setNormalTextStyle();
+        }
+    }
+
+    setNormalTextStyle() {
+        this.setTextStyle(this.normalTextStyle);
+    }
+
+    setHoveredTextStyle() {
+        this.setTextStyle(this.hoveredTextStyle);
+    }
 
     setTextStyle(textStyle) {
         if (this.text) {
@@ -63,17 +79,12 @@ class BaseTextButton extends PIXI.Container {
         this.isDown = false;
         this.setButtonTexture(this.normalTexture);
 
-        if (this.isOver) {
-            this.setTextStyle(this.hoveredTextStyle);
-        }
-        else {
-            this.setTextStyle(this.normalTextStyle);
-        }
+        this.updateTextStyle();
     }
 
     onButtonOver() {
         this.isOver = true;
-        this.setTextStyle(this.hoveredTextStyle);
+        this.updateTextStyle();
 
         if (this.isDown) {
             this.setButtonTexture(this.pressedTexture);
@@ -82,7 +93,7 @@ class BaseTextButton extends PIXI.Container {
 
     onButtonOut() {
         this.isOver = false;
-        this.setTextStyle(this.normalTextStyle);
+        this.updateTextStyle();
 
         if (this.isDown) {
             this.setButtonTexture(this.normalTexture);

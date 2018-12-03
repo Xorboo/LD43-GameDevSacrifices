@@ -4,9 +4,20 @@ let currentScene = null;
 let scenes = null;
 
 // TODO: loading everything here
-const loader = new PIXI.loaders.Loader("./assets");
-loader.add("atlases/atlas.json");
-loader.load(init);
+PIXI.loader
+    .add("assets/atlases/atlas.json")
+    .add(Params.atlases.hero.idle)
+    .add(Params.atlases.hero.run);
+
+for (let i = 0; i < Params.atlases.bosses.length; i++) {
+    const boss = Params.atlases.bosses[i];
+    PIXI.loader
+        .add(boss.attack)
+        .add(boss.hit)
+        .add(boss.idle);
+}
+
+PIXI.loader.load(init);
 
 function init() {
     // Basic initialization
