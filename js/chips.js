@@ -660,13 +660,13 @@ const GameData = {
     },
     handChipsCount: 8,
     bosses: [
-        { health: 4 },
-        /*{ health: 3 },
-        { health: 6 },
-        { health: 5 },*/
+        { health: 6, spriteId: 0 },
+        { health: 3, spriteId: 0 },
+        { health: 6, spriteId: 0 },
+        { health: 5, spriteId: 0 },
     ],
 
-    shuffle: function(a) {
+    shuffle: function (a) {
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
             j = Math.floor(Math.random() * (i + 1));

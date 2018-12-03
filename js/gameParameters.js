@@ -162,7 +162,8 @@ const Params = {
             textPanel: PIXI.Texture.fromImage("assets/backgrounds/Background_screen1_Panel.png"),
             hero: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_start_Rudolf.png"),
             torchBase: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_Torch.png"),
-        }
+        },
+        heart: PIXI.Texture.fromImage("assets/textures/heart.png"),
     },
 
     sounds: {
@@ -191,26 +192,8 @@ const Params = {
                 attack: "assets/atlases/boss/1/Boss_Attack.json",
                 hit: "assets/atlases/boss/1/Boss_Hit.json",
                 idle: "assets/atlases/boss/1/Boss_Idle.json",
-                die: "assets/atlases/boss/1/Boss_Hit.json"
+                die: "assets/atlases/boss/1/Boss_Dead.json"
             },
-            {
-                attack: "assets/atlases/boss/2/Boss_Attack.json",
-                hit: "assets/atlases/boss/2/Boss_Hit.json",
-                idle: "assets/atlases/boss/2/Boss_Idle.json",
-                die: "assets/atlases/boss/2/Boss_Hit.json"
-            },
-            {
-                attack: "assets/atlases/boss/3/Boss_Attack.json",
-                hit: "assets/atlases/boss/3/Boss_Hit.json",
-                idle: "assets/atlases/boss/3/Boss_Idle.json",
-                die: "assets/atlases/boss/3/Boss_Hit.json"
-            },
-            {
-                attack: "assets/atlases/boss/4/Boss_Attack.json",
-                hit: "assets/atlases/boss/4/Boss_Hit.json",
-                idle: "assets/atlases/boss/4/Boss_Idle.json",
-                die: "assets/atlases/boss/4/Boss_Hit.json"
-            }
         ],
         hero: {
             idle: "assets/atlases/hero/Rudolf_Idle.json",
@@ -222,7 +205,7 @@ const Params = {
     credits: [
         ["@Xorboo - Kirill Korepanov", "https://twitter.com/Xorboo"],
         ["@nec_neca - nEc neca", "https://twitter.com/nec_neca"],
-        ["@Mazokpixels - Evgeniy Yudin", "https://twitter.com/Mazokpixels"],
+        //["@Mazokpixels - Evgeniy Yudin", "https://twitter.com/Mazokpixels"],
         ["@GerodruS - Viktor Smirnov", "https://twitter.com/GerodruS"],
         ["@NikolsaNNN - Nikolay Sambosrky", "https://twitter.com/NikolsaNNN"]
     ]

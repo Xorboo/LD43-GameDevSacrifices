@@ -5,28 +5,23 @@ class Boss extends PIXI.Container {
         const bossParameters = GameData.bosses[bossId];
         this.maxHealth = this.health = bossParameters.health;
 
-        this.text = new PIXI.Text("Boss", Params.textStyle.test);
-        this.text.anchor.set(0.5);
-        this.text.position.set(this.width / 2, this.height / 2 - 100);
-        this.addChild(this.text);
-
-        const bossSheets = Params.atlases.bosses[bossId];
+        const bossSheets = Params.atlases.bosses[bossParameters.spriteId];
         this.bossIdle = this.createSprite(bossSheets.idle, "Boss_Idle", true);
         this.bossAttack = this.createSprite(bossSheets.attack, "Boss_Attack", false);
         this.bossHit = this.createSprite(bossSheets.hit, "Boss_Hit", false);
-        this.bossDie = this.createSprite(bossSheets.hit, "Boss_Hit", false);
+        this.bossDie = this.createSprite(bossSheets.die, "Boss_Dead", false, 1.0);
 
         this.currentBoss = null;
         this.startAnimation(this.bossIdle);
 
-        this.updateHealth();
+        this.spawnHealth();
     }
 
-    createSprite(sheetName, animationName, loop) {
+    createSprite(sheetName, animationName, loop, specialScaling) {
         const sheet = PIXI.loader.resources[sheetName].spritesheet;
         const animation = sheet.animations[animationName];
         let sprite = new PIXI.extras.AnimatedSprite(animation);
-        sprite.scale.set(Params.downscaleFactor);
+        sprite.scale.set(specialScaling ? specialScaling : Params.downscaleFactor);
         sprite.scale.x = -sprite.scale.x;
         sprite.anchor.set(0.5);
         sprite.visible = false;
@@ -71,7 +66,7 @@ class Boss extends PIXI.Container {
         if (this.isDead()) {
             SM.playBossDeath();
             this.startAnimation(this.bossDie);
-        } 
+        }
         else {
             this.startAnimation(this.bossHit);
         }
@@ -82,8 +77,28 @@ class Boss extends PIXI.Container {
         return this.health <= 0;
     }
 
+    spawnHealth() {
+        this.lifeSprites = [];
+
+        const y = -100;
+        const deltaX = 35;
+        const xStart = -deltaX * (this.maxHealth / 2 - 0.5);
+        for (let i = 0; i < this.maxHealth; i++) {
+            const x = xStart + deltaX * i;
+            let lifeSprite = new PIXI.Sprite(Params.textures.heart);
+            lifeSprite.anchor.set(0.5);
+            lifeSprite.position.set(x, y);
+            this.addChild(lifeSprite);
+            this.lifeSprites.push(lifeSprite);
+        }
+
+        this.updateHealth();
+    }
+
     updateHealth() {
-        this.text.text = this.isDead() ? "Dead" : "Boss [" + this.health + "/" + this.maxHealth + "]";
+        for (let i = 0; i < this.maxHealth; i++) {
+            this.lifeSprites[i].visible = i < this.health;
+        }
     }
 
     doWalk(desiredPosition, animationLength) {

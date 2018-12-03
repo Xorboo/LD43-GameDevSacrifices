@@ -3,25 +3,42 @@ const initialScene = Params.sceneType.START;
 let currentScene = null;
 let scenes = null;
 
-// Load textures
-PIXI.loader
-    .add(Params.atlases.hero.idle)
-    .add(Params.atlases.hero.run)
-    .add(Params.atlases.torch);
-for (let i = 0; i < Params.atlases.bosses.length; i++) {
-    const boss = Params.atlases.bosses[i];
-    PIXI.loader
-        .add(boss.attack)
-        .add(boss.hit)
-        .add(boss.idle);
-}
+WebFont.load({
+    custom: {
+        families: ['DeathtoMetal', 'Plain_Germanica', 'Deutsch']
+    },
+    active: e => {
+        console.log("Font loaded");
+        loadPixi();
+    }
+});
 
-// Load sounds
-SoundManager.preloadSounds();
-PIXI.loader.load(init);
+let loadPixi = function() {
+    console.log("Started loading...");
+
+    // Load textures
+    PIXI.loader
+        .add(Params.atlases.hero.idle)
+        .add(Params.atlases.hero.run)
+        .add(Params.atlases.torch);
+    for (let i = 0; i < Params.atlases.bosses.length; i++) {
+        const boss = Params.atlases.bosses[i];
+        PIXI.loader
+            .add(boss.attack)
+            .add(boss.hit)
+            .add(boss.idle)
+            .add(boss.die);
+    }
+    
+    // Load sounds
+    SoundManager.preloadSounds();
+    PIXI.loader.load(init);
+}
 
 
 function init() {
+    console.log("Game start");
+
     // Basic initialization
     const app = new PIXI.Application(Params.application);
     document.body.appendChild(app.view);
