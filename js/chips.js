@@ -81,7 +81,7 @@ const GameData = {
         ),
 
         playersTears: new Chip(
-            "Players tears",
+            "Player's tears",
         ),
 
         gameWithoutSoul: new Chip(
@@ -162,39 +162,39 @@ const GameData = {
         ),
 
         escapeFromCats: new Chip(
-            "Escape from hungry cats",
+            "You have to escape from hungry cats",
         ),
 
         strongIndependent: new Chip(
-            "You're strong and independent dev",
+            "Strong and independent developer",
         ),
 
         noWorkWithAnyone: new Chip(
-            "You can't work with anyone",
+            "Can't work with anyone",
         ),
 
         harassmentCharges: new Chip(
-            "Deal with harassment charges",
+            "Have to deal with harassment charges",
         ),
 
         foundEnemies: new Chip(
-            "You found enemies",
+            "Found some enemies",
         ),
 
         foundFriends: new Chip(
-            "You found best friends",
+            "Found best friends",
         ),
 
         reviewBombing: new Chip(
-            "Your game has review bombed",
+            "Game review was bombed",
         ),
 
         fansLove: new Chip(
-            "Fans loves you",
+            "Fans love you",
         ),
 
         oldBuzzwords: new Chip(
-            "Press-release full of old buzz-words",
+            "Press-release is full of old buzz-words",
         ),
 
         portToNewDevice: new Chip(
@@ -202,11 +202,11 @@ const GameData = {
         ),
 
         alcoholAddiction: new Chip(
-            "Alcohol Addiction",
+            "Alcohol addiction",
         ),
 
         vegan: new Chip(
-            "Become a vegan",
+            "Became a vegan",
         ),
 
         // Healthy sleep
@@ -356,35 +356,35 @@ const GameData = {
         ),
 
         developmentHell: new Chip(
-            "Game fall to development hell",
+            "Game has fallen into development hell",
         ),
 
         peoplePerfectionism: new Chip(
-            "People continue perfectionism",
+            "People are still perfectionists",
         ),
 
         becomeBlogger: new Chip(
-            "You become a blogger",
+            "Became a blogger",
         ),
 
         becomeCosplayer: new Chip(
-            "You become a cosplayer",
+            "Became a cosplayer",
         ),
 
         hateOfficeWork: new Chip(
-            "You hate office work",
+            "Hate office work",
         ),
 
         leftForFreelance: new Chip(
-            "You left the job for freelance",
+            "Left the job for freelance",
         ),
 
         continueCurrentJob: new Chip(
-            "Continue to work at the current job",
+            "Working at the current job",
         ),
 
         receiveJobInvitation: new Chip(
-            "You receive a great job invitation",
+            "Received a great job offer",
         ),
 
         // gamejam
@@ -455,7 +455,7 @@ const GameData = {
         ),
 
         stopWatchingCeiling: new Chip(
-            "Stop loafing all weekend",
+            "Stop looking at ceiling all weekends",
             _ => GameData.chips.eyesWeekends,
             _ => GameData.chips.ceilingLooking,
         ),
@@ -477,11 +477,11 @@ const GameData = {
         ),
 
         sayNo: new Chip(
-            "You learned saying NO",
+            "Learned saying NO",
         ),
 
         everyoneAmateurs: new Chip(
-            "You see everyone as amateurs",
+            "See everyone as amateurs",
         ),
 
         ownTeam: new Chip(
@@ -493,11 +493,11 @@ const GameData = {
         ),
 
         petBattle: new Chip(
-            "You have a pet-project with battles",
+            "Pet-project with battles",
         ),
 
         blockchainWallet: new Chip(
-            "You have a blockchain wallet",
+            "Blockchain wallet",
         ),
 
         worldOfTrading: new Chip(
@@ -595,7 +595,7 @@ const GameData = {
         ),
 
         buildTheories: new Chip(
-            "Players building theories",
+            "Players are building theories",
         ),
 
         bessWordLess: new Chip(
@@ -623,15 +623,15 @@ const GameData = {
         ),
 
         wiki: new Chip(
-            "Fanats created wiki",
+            "Fans created wiki",
         ),
 
         uweBoll: new Chip(
-            "Uwe Boll adapted your game",
+            "Uwe Boll adopted your game",
         ),
 
         newBookSeries: new Chip(
-            "New books inspired by your game",
+            "New books are inspired by your game",
         ),
 
         activeRest: new Chip(
@@ -660,10 +660,10 @@ const GameData = {
     },
     handChipsCount: 8,
     bosses: [
-        { health: 6, spriteId: 0 },
-        { health: 3, spriteId: 0 },
-        { health: 6, spriteId: 0 },
-        { health: 5, spriteId: 0 },
+        { health: 4, spriteId: 0, hint: "Education" },
+        { health: 3, spriteId: 0, hint: "Pre-production" },
+        { health: 6, spriteId: 0, hint: "Development" },
+        { health: 5, spriteId: 0, hint: "Marketing and release" },
     ],
 
     shuffle: function (a) {

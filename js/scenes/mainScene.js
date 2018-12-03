@@ -1,3 +1,18 @@
+class BossHint extends PIXI.Text {
+    constructor(text) {
+        super(text, Params.textStyle.bossHint);
+
+        this.anchor.set(0.5);
+        this.position.set(Params.application.width / 2, Params.application.height - 220);
+
+        var hideHintTimer = PIXI.timerManager.createTimer(1000 * Params.bossHintShowDuration);
+        hideHintTimer.on('end', (elapsed) => {
+            this.parent.removeChild(this);
+        });
+        hideHintTimer.start();
+    }
+};
+
 class MainScene extends SceneBase {
     constructor(switchCallback) {
         super(switchCallback);
@@ -135,7 +150,7 @@ class MainScene extends SceneBase {
         }
 
         this.bossIndex = 0;
-        this.updateBossIndex(0.0);
+        this.updateBossIndex(0.0, Params.introWalkTime + Params.bossIndexUpdatePause);
         this.initBoss();
 
         // Start first movement animation
@@ -168,7 +183,7 @@ class MainScene extends SceneBase {
         evolveTimer.start();
 
         // Calculate walk animation time
-        const animationLength = Params.chipEvolvePause * this.chipsButtons.length + Params.extraWalkTime;
+        const animationLength = this.getAnimationLength();
 
         // Disable player actions for animation
         this.disableChipsFor(animationLength, this.hasGameOverChip);
@@ -179,7 +194,8 @@ class MainScene extends SceneBase {
         // Spawn new boss if needed
         this.bossIndex++;
         if (!this.hasGameOverChip) {
-            this.updateBossIndex(animationLength - 1.0);
+            const titleDelay = animationLength + Params.bossIndexUpdatePause;
+            this.updateBossIndex(titleDelay, titleDelay);
         }
 
         // If we have more bosses to fight
@@ -231,17 +247,33 @@ class MainScene extends SceneBase {
         }
     }
 
-    updateBossIndex(delay) {
+    updateBossIndex(delay, hintDelay) {
         const levelStrings = ["ONE", "TWO", "THREE", "FOUR"];
-        const updateFunc = () => this.levelHeader.text = "LEVEL " + levelStrings[Math.min(this.bossIndex, levelStrings.length - 1)];
+        const updateTitle = () => {
+            this.levelHeader.text = "LEVEL " + levelStrings[Math.min(this.bossIndex, levelStrings.length - 1)];
+        };
 
         if (delay > 0) {
-            var delayTimer = PIXI.timerManager.createTimer(1000 * delay);
-            delayTimer.on('end', elapsed => { updateFunc(); });
-            delayTimer.start();
+            var titleDelayTimer = PIXI.timerManager.createTimer(1000 * delay);
+            titleDelayTimer.on('end', elapsed => { updateTitle(); });
+            titleDelayTimer.start();
         }
         else {
-            updateFunc();
+            updateTitle();
+        }
+        
+        const showHint = () => {
+            let bossHint = new BossHint(GameData.bosses[this.bossIndex].hint);
+            this.addChild(bossHint);
+        };
+
+        if (hintDelay > 0) {
+            var hintDelayTimer = PIXI.timerManager.createTimer(1000 * hintDelay);
+            hintDelayTimer.on('end', elapsed => { showHint(); });
+            hintDelayTimer.start();
+        }
+        else {
+            showHint();
         }
     }
 
@@ -281,6 +313,10 @@ class MainScene extends SceneBase {
         this.bossContainer.addChild(this.currentBoss);
 
         this.currentBoss.onDealDamage = (boss) => { this.hero.doReceiveHit() };
+    }
+
+    getAnimationLength() {
+        return Params.chipEvolvePause * this.chipsButtons.length + Params.extraWalkTime;
     }
 
     loseGame(chip) {

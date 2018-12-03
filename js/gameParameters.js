@@ -23,6 +23,8 @@ const Params = {
     afterKillDelay: 1.0,
     gameLosePause: 0.8,
     gameWinPause: 0.8,
+    bossHintShowDuration: 4,
+    bossIndexUpdatePause: -1,
 
     stepPeriod: 4 / 12,      // every 4 frames
     animationSpeed: 1 / 5,   // 12 fps
@@ -32,6 +34,15 @@ const Params = {
     chipButtonHeight: 28,
 
     textStyle: {
+        bossHint: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 26,
+            fill: "#666666",
+            stroke: "white",
+            strokeThickness: 4,
+            align: "center"
+        }),
+
         credits: new PIXI.TextStyle({
             fontFamily: "Deutsch",
             fontSize: 20,
