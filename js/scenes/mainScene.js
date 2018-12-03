@@ -1,6 +1,6 @@
 class MainScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, null);
+        super(switchCallback);
 
         // Add background
         const wallShift = 10, wallHeight = 221;

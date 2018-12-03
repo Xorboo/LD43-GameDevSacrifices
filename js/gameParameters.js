@@ -1,38 +1,3 @@
-class SoundPack {
-    constructor(prefix, amount) {
-        this.prefix = prefix;
-        this.amount = amount;
-    }
-
-    addToLoader() {
-        for (let i = 1; i <= this.amount; i++) {
-            const name = this.getName(i);
-            PIXI.loader.add(name, "assets/sounds/" + name + ".wav");
-        }
-    }
-
-    playRandom() {
-        const sound = this.getRandom();
-        sound.play();
-    }
-
-    getRandom() {
-        const index = this.getRandomInt(1, this.amount);
-        const name = this.getName(index);
-        return PIXI.loader.resources[name].sound
-    }
-
-    getName(index) {
-        return this.prefix + index;
-    }
-
-    getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-}
-
 const Params = {
     application: {
         width: 800,
@@ -59,6 +24,12 @@ const Params = {
     downscaleFactor: 0.687,
 
     textStyle: {
+        introText: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 32,
+            fill: "black",
+            align : 'center'
+        }),
         levelHeader: new PIXI.TextStyle({
             fontFamily: "DeathtoMetal",
             fontSize: 36,
@@ -162,6 +133,11 @@ const Params = {
         button: {
             normal: "assets/buttons/grey_button_normal.png",
             pressed: "assets/buttons/grey_button_pressed.png"
+        },
+        intro: {
+            textPanel: PIXI.Texture.fromImage("assets/backgrounds/Background_screen1_Panel.png"),
+            hero: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_start_Rudolf.png"),
+            torchBase: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_Torch.png"),
         }
     },
 
@@ -208,6 +184,7 @@ const Params = {
         hero: {
             idle: "assets/atlases/hero/Rudolf_Idle.json",
             run: "assets/atlases/hero/Rudolf_Run.json"
-        }
+        },
+        torch: "assets/atlases/FireTorch.json"
     }
 }

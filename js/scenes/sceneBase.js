@@ -16,8 +16,6 @@ class SceneBase extends PIXI.Container {
     }
 
     init(data) {
-        console.log("Init with data:");
-        console.log(data);
     }
 
     update(deltaTime) {

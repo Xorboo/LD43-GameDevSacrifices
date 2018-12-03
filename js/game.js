@@ -7,7 +7,8 @@ let scenes = null;
 PIXI.loader
     .add("assets/atlases/atlas.json")
     .add(Params.atlases.hero.idle)
-    .add(Params.atlases.hero.run);
+    .add(Params.atlases.hero.run)
+    .add(Params.atlases.torch);
 for (let i = 0; i < Params.atlases.bosses.length; i++) {
     const boss = Params.atlases.bosses[i];
     PIXI.loader
