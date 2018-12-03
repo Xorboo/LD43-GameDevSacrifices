@@ -20,7 +20,8 @@ let loadPixi = function() {
     PIXI.loader
         .add(Params.atlases.hero.idle)
         .add(Params.atlases.hero.run)
-        .add(Params.atlases.torch);
+        .add(Params.atlases.torch)
+        .add(Params.atlases.flashFx);
     for (let i = 0; i < Params.atlases.bosses.length; i++) {
         const boss = Params.atlases.bosses[i];
         PIXI.loader

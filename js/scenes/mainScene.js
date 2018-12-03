@@ -208,13 +208,7 @@ class MainScene extends SceneBase {
 
             // Check if we evolved to a game over chip
             if (this.hasGameOverChip) {
-                var gameOverSoundTimer = PIXI.timerManager.createTimer(1000 * (animationLength));
-                gameOverSoundTimer.on('end', (elapsed) => {
-                    SM.playGameOver();
-                });
-                gameOverSoundTimer.start();
-                
-                var gameOverTimer = PIXI.timerManager.createTimer(1000 * (animationLength + Params.gameLosePause));
+                var gameOverTimer = PIXI.timerManager.createTimer(1000 * animationLength);
                 gameOverTimer.on('end', (elapsed) => {
                     this.loseGame(this.gameOverChip);
                 });
@@ -224,16 +218,11 @@ class MainScene extends SceneBase {
         else {
             this.animateCoreMovement(animationLength, false);
 
-            var gameWinSoundTimer = PIXI.timerManager.createTimer(1000 * (animationLength));
-            gameWinSoundTimer.on('end', (elapsed) => {
-                SM.playGameWin();
+            var gameWinTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+            gameWinTimer.on('end', (elapsed) => {
+                this.finishGame();
             });
-            gameWinSoundTimer.start();
-
-            // Finished the game wait for buttons evolution and show final screen
-            var finishGameTimer = PIXI.timerManager.createTimer(1000 * (animationLength + Params.gameWinPause));
-            finishGameTimer.on('end', (elapsed) => { this.finishGame(); });
-            finishGameTimer.start();
+            gameWinTimer.start();
         }
     }
 
@@ -320,21 +309,29 @@ class MainScene extends SceneBase {
     }
 
     loseGame(chip) {
+        SM.playGameOver();
         this.hero.doDeath();
 
-        // TODO? Add pause if we have hero animation
-        this.switchCallback(Params.sceneType.FAIL, {
-            loseChip: chip
+        var newScreenTimer = PIXI.timerManager.createTimer(1000 * Params.gameLosePause);
+        newScreenTimer.on('end', (elapsed) => {
+            this.switchCallback(Params.sceneType.FAIL, {
+                loseChip: chip
+            });
         });
+        newScreenTimer.start();
     }
 
     finishGame() {
+        SM.playGameWin();
         this.hero.doWin();
 
-        // TODO? Add pause if we have hero animation
-        let finalState = {
-            finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
-        };
-        this.switchCallback(Params.sceneType.FINISH, finalState);
+        var newScreenTimer = PIXI.timerManager.createTimer(1000 * Params.gameWinPause);
+        newScreenTimer.on('end', (elapsed) => {
+            let finalState = {
+                finalChips: this.chipsButtons.map(chipButton => chipButton.chip)
+            };
+            this.switchCallback(Params.sceneType.FINISH, finalState);
+        });
+        newScreenTimer.start();
     }
 }

@@ -212,7 +212,8 @@ const Params = {
             idle: "assets/atlases/hero/Rudolf_Idle.json",
             run: "assets/atlases/hero/Rudolf_Run.json"
         },
-        torch: "assets/atlases/FireTorch.json"
+        torch: "assets/atlases/FireTorch.json",
+        flashFx: "assets/atlases/Flash_Fx.json",
     },
 
     credits: [

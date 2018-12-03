@@ -2,11 +2,6 @@ class Hero extends PIXI.Container {
     constructor() {
         super();
 
-        this.text = new PIXI.Text("", Params.textStyle.test);
-        this.text.anchor.set(0.5);
-        this.text.position.set(this.width / 2, this.height / 2 - 120);
-        this.addChild(this.text);
-
         const heroSheets = Params.atlases.hero;
         this.heroIdle = this.createSprite(heroSheets.idle, "Rudolf_Idle", true);
         this.heroRun = this.createSprite(heroSheets.run, "Rudolf_Run", true);
@@ -23,8 +18,6 @@ class Hero extends PIXI.Container {
         this.isWalking = false;
         this.isDead = false;
         this.isWin = false;
-
-        this.text.text = "";
     }
 
     createSprite(sheetName, animationName, loop) {
@@ -101,13 +94,27 @@ class Hero extends PIXI.Container {
     doDeath() {
         this.isDead = true;
         this.startAnimation(this.heroDeath);
-        this.text.text = "Dead";
+        this.createLightning();
     }
 
     // On game complete
     doWin() {
         this.isWin = true;
         this.startAnimation(this.heroWin);
-        this.text.text = "Won";
+        this.createLightning();
+    }
+
+    createLightning() {
+        const sheetName = Params.atlases.flashFx;
+        const sheet = PIXI.loader.resources[sheetName].spritesheet;
+        const animation = sheet.animations["Flash_FX"];
+        let fxSprite = new PIXI.extras.AnimatedSprite(animation);
+        fxSprite.anchor.set(0.5);
+        fxSprite.position.set(0, -55);
+        fxSprite.animationSpeed = Params.animationSpeed;
+        fxSprite.loop = false;
+        fxSprite.play();
+
+        this.addChild(fxSprite);
     }
 }
