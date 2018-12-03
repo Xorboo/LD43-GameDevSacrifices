@@ -108,7 +108,7 @@ const GameData = {
         ),
 
         howTalkPeople: new Chip(
-            "Learn how to talk to people",
+            "Learn talking to people",
             _ => GameData.chips.stopMisanthrope,
             _ => GameData.chips.feedCats,
         ),
@@ -166,7 +166,7 @@ const GameData = {
         ),
 
         strongIndependent: new Chip(
-            "Become strong and independent developer",
+            "You're strong and independent dev",
         ),
 
         noWorkWithAnyone: new Chip(
@@ -186,7 +186,7 @@ const GameData = {
         ),
 
         reviewBombing: new Chip(
-            "People are review bombing your game",
+            "Your game has review bombed",
         ),
 
         fansLove: new Chip(
@@ -194,11 +194,11 @@ const GameData = {
         ),
 
         oldBuzzwords: new Chip(
-            "Use old buzz-words at press-release",
+            "Press-release full of old buzz-words",
         ),
 
         portToNewDevice: new Chip(
-            "Make a port of game to new device",
+            "Game was ported to new device",
         ),
 
         alcoholAddiction: new Chip(
@@ -255,7 +255,7 @@ const GameData = {
         ),
 
         projectWasCanceled: new Chip(
-            "Project was cancelled",
+            "Game was cancelled",
         ),
 
         // vacation
@@ -352,7 +352,7 @@ const GameData = {
         ),
 
         forgetTheGame: new Chip(
-            "You want to start new and forget about the game",
+            "You want to forget",
         ),
 
         developmentHell: new Chip(
@@ -413,7 +413,7 @@ const GameData = {
         ),
 
         addBattleRoyale: new Chip(
-            "Add to pet-project battle-royale mode",
+            "Add battle-royale to pet-project",
             _ => GameData.chips.addBlockchain,
             _ => GameData.chips.addBattle,
         ),
@@ -425,7 +425,7 @@ const GameData = {
         ),
 
         useFreeTime: new Chip(
-            "Start to use free time somehow",
+            "Start using free time somehow",
             _ => GameData.chips.courses,
             _ => GameData.chips.stopWatchingCeiling,
         ),
@@ -443,19 +443,19 @@ const GameData = {
         ),
 
         addBattle: new Chip(
-            "Add to pet-project at least a battle",
+            "Add at least battles to pet-project",
             _ => GameData.chips.petBattle,
             _ => GameData.chips.returnToPet,
         ),
 
         addBlockchain: new Chip(
-            "Add to project blockchain",
+            "Add blockchain to pet-project",
             _ => GameData.chips.howTradeOff,
             _ => GameData.chips.blockchainWallet,
         ),
 
         stopWatchingCeiling: new Chip(
-            "Stop looking at the ceiling all weekend",
+            "Stop looking at ceiling all weekend",
             _ => GameData.chips.eyesWeekends,
             _ => GameData.chips.ceilingLooking,
         ),
@@ -473,15 +473,15 @@ const GameData = {
         ),
 
         underestimated: new Chip(
-            "You consider yourself underestimated",
+            "You're underestimated",
         ),
 
         sayNo: new Chip(
-            "You learned how to say NO",
+            "You learned saying NO",
         ),
 
         everyoneAmateurs: new Chip(
-            "You consider everyone as amateurs",
+            "You think everyone as amateurs",
         ),
 
         ownTeam: new Chip(
@@ -489,11 +489,11 @@ const GameData = {
         ),
 
         returnToPet: new Chip(
-            "You will return to your pet-project someday",
+            "You'll return to pet-project someday",
         ),
 
         petBattle: new Chip(
-            "You have a pet-project with a battle",
+            "You have a pet-project with battles",
         ),
 
         blockchainWallet: new Chip(
@@ -509,15 +509,15 @@ const GameData = {
         ),
 
         eyesWeekends: new Chip(
-            "You prefer not to open your eyes all the weekends",
+            "You don't open your eyes all weekends",
         ),
 
         knowSomething: new Chip(
-            "You think you know something",
+            "You know something",
         ),
 
         knowNothing: new Chip(
-            "You think you know nothing",
+            "You know nothing",
         ),
 
         youFired: new Chip(
@@ -595,7 +595,7 @@ const GameData = {
         ),
 
         buildTheories: new Chip(
-            "Players understand nothing, but build theories",
+            "Players building theories",
         ),
 
         bessWordLess: new Chip(
@@ -607,7 +607,7 @@ const GameData = {
         ),
 
         pornBaron: new Chip(
-            "Become a porn baron",
+            "Became a porn baron",
         ),
 
         childrenHate: new Chip(
@@ -619,19 +619,19 @@ const GameData = {
         ),
 
         nobodyPlot: new Chip(
-            "Nobody know plot of the game",
+            "Nobody knows plot of the game",
         ),
 
         wiki: new Chip(
-            "Fanats creating a wiki",
+            "Fanats created wiki",
         ),
 
         uweBoll: new Chip(
-            "Uwe Boll adapting your game",
+            "Uwe Boll adapted your game",
         ),
 
         newBookSeries: new Chip(
-            "New book series inspired your game",
+            "New books inspired by your game",
         ),
 
         activeRest: new Chip(
@@ -660,10 +660,10 @@ const GameData = {
     },
     handChipsCount: 8,
     bosses: [
-        { health: 1 },
-        { health: 2 },
         { health: 4 },
         { health: 3 },
+        { health: 6 },
+        { health: 5 },
     ],
 
     shuffle: function(a) {

@@ -95,14 +95,14 @@ const Params = {
         chipHover: new PIXI.TextStyle({
             fontFamily: "Deutsch",
             fontSize: 20,
-            fill: "#black",
-            stroke: "#555555",
+            fill: "black",
+            stroke: "red",
             strokeThickness: 4,
         }),
         chipSacrificed: new PIXI.TextStyle({
             fontFamily: "Deutsch",
             fontSize: 20,
-            fill: "#444444"
+            fill: "#990000"
         }),
         chipLose: new PIXI.TextStyle({
             fontFamily: "Deutsch",
