@@ -633,6 +633,30 @@ const GameData = {
         newBookSeries: new Chip(
             "New book series inspired your game",
         ),
+
+        activeRest: new Chip(
+            "Active rest",
+            _ => GameData.chips.activeRest,
+            _ => GameData.chips.visitDoctor,
+        ),
+
+        visitDoctor: new Chip(
+            "Visit a doctor",
+            _ => GameData.chips.takeMedication,
+            _ => GameData.chips.leftGameDev,
+        ),
+
+        takeMedication: new Chip(
+            "Take medication",
+            _ => GameData.chips.activeRest2,
+            _ => GameData.chips.leftGameDev,
+        ),
+
+        activeRest2: new Chip(
+            "Active rest",
+            _ => GameData.chips.activeRest2,
+            _ => GameData.chips.leftGameDev,
+        ),
     },
     handChipsCount: 8,
     bosses: [
@@ -641,8 +665,20 @@ const GameData = {
         { health: 4 },
         { health: 3 },
     ],
+
+    shuffle: function(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    },
+
     handChips: function () {
-        return [
+        let chipsOnHand = [
             this.chips.personalLife,
             this.chips.socialLife,
             this.chips.healthySleep,
@@ -650,8 +686,10 @@ const GameData = {
             this.chips.buildPortfolio,
             this.chips.gamejam,
             this.chips.readMore,
+            this.chips.activeRest,
             // TODO Add all starting chips here
         ];
+        return this.shuffle(chipsOnHand);
     },
 
     getInitialChips: function () {
