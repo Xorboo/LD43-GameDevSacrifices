@@ -156,8 +156,7 @@ const Params = {
             levelNumber: PIXI.Texture.fromImage('assets/backgrounds/Plashka_LevelNumber.png')
         },
         button: {
-            normal: "assets/buttons/grey_button_normal.png",
-            pressed: "assets/buttons/grey_button_pressed.png"
+            pixel: "assets/buttons/pixel.png",
         },
         intro: {
             textPanel: PIXI.Texture.fromImage("assets/backgrounds/Background_screen1_Panel.png"),
@@ -174,6 +173,8 @@ const Params = {
         gameOver: "assets/sounds/Dark_lose.wav",
         win: "assets/sounds/Win.wav",
         fire: "assets/sounds/Fire.wav",
+        door: "assets/sounds/Door_creak.wav",
+        item: "assets/sounds/Item_change.wav",
         steps: new SoundPack("step_", 6),
         doDamage: new SoundPack("dmg_", 4),
         takeDamage: new SoundPack("take_dmg_", 2)

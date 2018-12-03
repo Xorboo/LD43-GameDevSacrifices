@@ -10,28 +10,30 @@ class StartScene extends SceneBase {
         this.createContainer({
             bg: "Backgrouns_screen1_start.png",
             text: "I always wanted\nto make a game...",
-            addExtra: function (container) {
+            addExtra: (container) => {
                 let heroSprite = new PIXI.Sprite(Params.textures.intro.hero);
                 heroSprite.anchor.set(0.5);
                 heroSprite.position.set(Params.application.width - 230, Params.application.height - 160);
                 container.addChild(heroSprite);
-            }
+            },
         });
         this.createContainer({
             bg: "Backgrouns_screen1_closed door.png",
             text: "But it wasn't\nas easy as I thought...",
-            addExtra: function (container) {
+            addExtra: (container) => {
                 StartScene.addHero(container);
                 StartScene.addTorches(container);
-            }
+            },
+            onOpen: () => { SM.setFirePlay(true); }
         });
         this.createContainer({
             bg: "Backgrouns_screen1.png",
             text: "Sacrifices\nhad to be made...",
-            addExtra: function (container) {
+            addExtra: (container) => {
                 StartScene.addHero(container);
                 StartScene.addTorches(container);
-            }
+            },
+            onOpen: () => { SM.playDoor(); }
         });
 
         let textPanelSprite = new PIXI.Sprite(Params.textures.intro.textPanel);
@@ -67,15 +69,14 @@ class StartScene extends SceneBase {
 
         this.currentIndex++;
         if (this.currentIndex >= this.containers.length) {
-            this.hideCurrentContainer();
             this.switchCallback(Params.sceneType.MAIN, {});
         }
         else {
             this.updateContainer();
         }
 
-        if (this.currentIndex == 1) {
-            SM.setFirePlay(true);
+        if (this.currentContainer && this.currentContainer.onOpen) {
+            this.currentContainer.onOpen();
         }
     }
 
@@ -89,6 +90,7 @@ class StartScene extends SceneBase {
     hideCurrentContainer() {
         if (this.currentContainer) {
             this.currentContainer.container.visible = false;
+            this.currentContainer = null;
         }
     }
 
@@ -107,7 +109,8 @@ class StartScene extends SceneBase {
 
         this.containers.push({
             container: container,
-            text: data.text
+            text: data.text,
+            onOpen: data.onOpen
         });
         return container;
     }

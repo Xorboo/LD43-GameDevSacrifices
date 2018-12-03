@@ -1,8 +1,8 @@
 class ChipButton extends BaseTextButton {
     constructor(chip, onChipClickedCallback) {
         super(
-            Params.textures.button.normal,
-            Params.textures.button.pressed,
+            Params.textures.button.pixel,
+            null,
             "???",
             Params.textStyle.chip,
             Params.textStyle.chipHover);
@@ -46,6 +46,8 @@ class ChipButton extends BaseTextButton {
             newChip = chip;
         }
         this.setChip(newChip);
+
+        SM.playItem();
     }
 
     chipClicked() {

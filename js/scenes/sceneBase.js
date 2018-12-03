@@ -46,7 +46,7 @@ class SceneBase extends PIXI.Container {
     }
 
     addFullscreenButton(callback) {
-        let fullscreenButton = new BaseTextButton(Params.textures.button.normal);
+        let fullscreenButton = new BaseTextButton(Params.textures.button.pixel);
         fullscreenButton.button.alpha = 0;
         fullscreenButton.button.width = Params.application.width;
         fullscreenButton.button.height = Params.application.height;

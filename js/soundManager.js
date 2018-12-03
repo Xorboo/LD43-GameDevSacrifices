@@ -18,6 +18,10 @@ class SoundManager {
         this.fire = PIXI.loader.resources["fire"].sound;
         this.fire.volume = 0.2;
         this.fire.loop = true;
+        this.door = PIXI.loader.resources["door"].sound;
+        this.door.volume = 0.4;
+        this.item = PIXI.loader.resources["item"].sound;
+        this.item.volume = 0.3;
     }
 
     static preloadSounds() {
@@ -28,7 +32,9 @@ class SoundManager {
             .add("bossDeath", Params.sounds.bossDeath)
             .add("gameOver", Params.sounds.gameOver)
             .add("win", Params.sounds.win)
-            .add("fire", Params.sounds.fire);
+            .add("fire", Params.sounds.fire)
+            .add("door", Params.sounds.door)
+            .add("item", Params.sounds.item);
         Params.sounds.steps.addToLoader();
         Params.sounds.doDamage.addToLoader();
         Params.sounds.takeDamage.addToLoader();
@@ -66,6 +72,15 @@ class SoundManager {
             this.fire.stop();
         }
     }
+
+    playDoor() {
+        this.door.play();
+    }
+
+    playItem() {
+        this.item.play();
+    }
+
     playButton1() {
         this.button1.play();
     }

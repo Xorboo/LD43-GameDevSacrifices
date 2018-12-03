@@ -661,6 +661,9 @@ const GameData = {
     handChipsCount: 8,
     bosses: [
         { health: 4 },
+        /*{ health: 3 },
+        { health: 6 },
+        { health: 5 },*/
     ],
 
     shuffle: function(a) {
