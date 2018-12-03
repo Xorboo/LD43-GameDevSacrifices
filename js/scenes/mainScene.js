@@ -171,14 +171,16 @@ class MainScene extends SceneBase {
         const animationLength = Params.chipEvolvePause * this.chipsButtons.length + Params.extraWalkTime;
 
         // Disable player actions for animation
-        this.disableChipsFor(animationLength);
+        this.disableChipsFor(animationLength, this.hasGameOverChip);
 
         // Move dead boss
         this.currentBoss.doFakeWalk(animationLength, (boss) => this.removeChild(boss));
 
         // Spawn new boss if needed
         this.bossIndex++;
-        this.updateBossIndex(animationLength - 1.0);
+        if (!this.hasGameOverChip) {
+            this.updateBossIndex(animationLength - 1.0);
+        }
 
         // If we have more bosses to fight
         if (this.bossIndex < GameData.bosses.length) {
@@ -190,18 +192,30 @@ class MainScene extends SceneBase {
 
             // Check if we evolved to a game over chip
             if (this.hasGameOverChip) {
-                var checkGameOverTimer = PIXI.timerManager.createTimer(1000 * animationLength);
-                checkGameOverTimer.on('end', (elapsed) => {
+                var gameOverSoundTimer = PIXI.timerManager.createTimer(1000 * (animationLength));
+                gameOverSoundTimer.on('end', (elapsed) => {
+                    SM.playGameOver();
+                });
+                gameOverSoundTimer.start();
+                
+                var gameOverTimer = PIXI.timerManager.createTimer(1000 * (animationLength + Params.gameLosePause));
+                gameOverTimer.on('end', (elapsed) => {
                     this.loseGame(this.gameOverChip);
                 });
-                checkGameOverTimer.start();
+                gameOverTimer.start();
             }
         }
         else {
             this.animateCoreMovement(animationLength, false);
 
+            var gameWinSoundTimer = PIXI.timerManager.createTimer(1000 * (animationLength));
+            gameWinSoundTimer.on('end', (elapsed) => {
+                SM.playGameWin();
+            });
+            gameWinSoundTimer.start();
+
             // Finished the game wait for buttons evolution and show final screen
-            var finishGameTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+            var finishGameTimer = PIXI.timerManager.createTimer(1000 * (animationLength + Params.gameWinPause));
             finishGameTimer.on('end', (elapsed) => { this.finishGame(); });
             finishGameTimer.start();
         }
@@ -231,14 +245,16 @@ class MainScene extends SceneBase {
         }
     }
 
-    disableChipsFor(animationLength) {
+    disableChipsFor(animationLength, forever = false) {
         this.setChipButtonsEnabled(false);
 
-        var enableChipsTimer = PIXI.timerManager.createTimer(1000 * animationLength);
-        enableChipsTimer.on('end', (elapsed) => {
-            this.setChipButtonsEnabled(true);
-        });
-        enableChipsTimer.start();
+        if (!forever) {
+            var enableChipsTimer = PIXI.timerManager.createTimer(1000 * animationLength);
+            enableChipsTimer.on('end', (elapsed) => {
+                this.setChipButtonsEnabled(true);
+            });
+            enableChipsTimer.start();
+        }
     }
 
     animateCoreMovement(animationLength, animateNewBoss = true) {

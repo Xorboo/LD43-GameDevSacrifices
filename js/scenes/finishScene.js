@@ -26,7 +26,6 @@ class FinishScene extends SceneBase {
     init(data) {
         super.init(data);
 
-        SM.playGameWin();
         SM.setFirePlay(false);
 
         this.clearPerks();

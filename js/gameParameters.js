@@ -21,6 +21,8 @@ const Params = {
     bossDeathSoundDelay: 0.5,
     hitSoundDelay: 0.2,
     afterKillDelay: 1.0,
+    gameLosePause: 0.8,
+    gameWinPause: 0.8,
 
     stepPeriod: 4 / 12,      // every 4 frames
     animationSpeed: 1 / 5,   // 12 fps

@@ -28,7 +28,6 @@ class FailScene extends SceneBase {
     init(data) {
         super.init(data);
 
-        SM.playGameOver();
         SM.setFirePlay(false);
 
         this.reasonText.text = data.loseChip.text;
