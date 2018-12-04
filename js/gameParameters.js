@@ -191,6 +191,12 @@ const Params = {
                 idle: "assets/atlases/boss/1/Boss_Idle.json",
                 die: "assets/atlases/boss/1/Boss_Dead.json"
             },
+            {
+                attack: "assets/atlases/boss/2/Boss_Attack.json",
+                hit: "assets/atlases/boss/2/Boss_Hit.json",
+                idle: "assets/atlases/boss/2/Boss_Idle.json",
+                die: "assets/atlases/boss/2/Boss_Dead.json"
+            }
         ],
         hero: {
             idle: "assets/atlases/hero/Rudolf_Idle.json",

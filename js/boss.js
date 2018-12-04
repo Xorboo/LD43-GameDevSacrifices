@@ -9,7 +9,7 @@ class Boss extends PIXI.Container {
         this.bossIdle = this.createSprite(bossSheets.idle, "Boss_Idle", true);
         this.bossAttack = this.createSprite(bossSheets.attack, "Boss_Attack", false);
         this.bossHit = this.createSprite(bossSheets.hit, "Boss_Hit", false);
-        this.bossDie = this.createSprite(bossSheets.die, "Boss_Dead", false, 1.0);
+        this.bossDie = this.createSprite(bossSheets.die, "Boss_Dead", false, bossId % 2 == 0 ? 1.0 : null);
 
         this.currentBoss = null;
         this.startAnimation(this.bossIdle);

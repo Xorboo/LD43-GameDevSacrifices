@@ -662,9 +662,9 @@ const GameData = {
     
     bosses: [
         { health: 4, spriteId: 0, hint: "Education" },
-        { health: 3, spriteId: 0, hint: "Pre-production" },
+        { health: 3, spriteId: 1, hint: "Pre-production" },
         { health: 6, spriteId: 0, hint: "Development" },
-        { health: 5, spriteId: 0, hint: "Marketing and release" },
+        { health: 5, spriteId: 1, hint: "Marketing and release" },
     ],
 
     shuffle: function (a) {
