@@ -8,7 +8,7 @@ class StartScene extends SceneBase {
         this.currentIndex = 0;
         this.containers = [];
         this.createContainer({
-            bg: "Backgrouns_screen1_start.png",
+            bg: Params.textures.intro.bg[0],
             text: "I always wanted\nto make a game...",
             addExtra: (container) => {
                 let heroSprite = new PIXI.Sprite(Params.textures.intro.hero);
@@ -18,7 +18,7 @@ class StartScene extends SceneBase {
             },
         });
         this.createContainer({
-            bg: "Backgrouns_screen1_closed door.png",
+            bg: Params.textures.intro.bg[1],
             text: "But it wasn't\nas easy as I thought...",
             addExtra: (container) => {
                 StartScene.addHero(container);
@@ -27,7 +27,7 @@ class StartScene extends SceneBase {
             onOpen: () => { SM.setFirePlay(true); }
         });
         this.createContainer({
-            bg: "Backgrouns_screen1.png",
+            bg: Params.textures.intro.bg[2],
             text: "Sacrifices\nhad to be made...",
             addExtra: (container) => {
                 StartScene.addHero(container);
@@ -99,8 +99,7 @@ class StartScene extends SceneBase {
         container.visible = false;
         this.baseContainer.addChild(container);
 
-        let spriteTexture = PIXI.Texture.fromImage("assets/backgrounds/" + data.bg);
-        let sprite = new PIXI.Sprite(spriteTexture);
+        let sprite = PIXI.Sprite.fromImage(data.bg);
         sprite.width = Params.application.width;
         sprite.height = Params.application.height;
         container.addChild(sprite);

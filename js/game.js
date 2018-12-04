@@ -31,6 +31,9 @@ let loadPixi = function () {
             .add(boss.idle)
             .add(boss.die);
     }
+    for(let i = 0; i < Params.textures.intro.bg.length; i++) {
+        PIXI.loader.add(Params.textures.intro.bg[i]);
+    }
 
     // Load sounds
     SoundManager.preloadSounds();

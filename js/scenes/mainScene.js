@@ -4,12 +4,6 @@ class BossHint extends PIXI.Text {
 
         this.anchor.set(0.5);
         this.position.set(Params.application.width / 2, Params.application.height - 220);
-
-        var hideHintTimer = PIXI.timerManager.createTimer(1000 * Params.bossHintShowDuration);
-        hideHintTimer.on('end', (elapsed) => {
-            this.parent.removeChild(this);
-        });
-        hideHintTimer.start();
     }
 };
 
@@ -129,6 +123,14 @@ class MainScene extends SceneBase {
 
             // Disable player actions
             this.setChipButtonsEnabled(false);
+
+            // Hide dead boss hint
+            if (this.currentBossHint) {
+                this.removeChild(this.currentBossHint);
+                this.currentBossHint = null;
+            }
+            
+            // Start next boss sequence
             var delayTimer = PIXI.timerManager.createTimer(1000 * Params.afterKillDelay);
             delayTimer.on('end', (elapsed) => {
                 this.moveToNextBoss();
@@ -253,8 +255,8 @@ class MainScene extends SceneBase {
         }
         
         const showHint = () => {
-            let bossHint = new BossHint(GameData.bosses[this.bossIndex].hint);
-            this.addChild(bossHint);
+            this.currentBossHint = new BossHint(GameData.bosses[this.bossIndex].hint);
+            this.addChild(this.currentBossHint);
         };
 
         if (hintDelay > 0) {

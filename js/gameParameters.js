@@ -23,7 +23,6 @@ const Params = {
     afterKillDelay: 1.0,
     gameLosePause: 0.8,
     gameWinPause: 0.8,
-    bossHintShowDuration: 4,
     bossIndexUpdatePause: -1,
 
     stepPeriod: 4 / 12,      // every 4 frames
@@ -64,12 +63,6 @@ const Params = {
             fill: "#e53500",
             align: "center"
         }),
-        /*failHint: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 30,
-            fill: "black",
-            align: "center"
-        }),*/
         failDescription: new PIXI.TextStyle({
             fontFamily: "fighting_spirit_PG_ital",
             fontSize: 36,
@@ -147,7 +140,6 @@ const Params = {
 
     textures: {
         background: {
-            start: PIXI.Texture.fromImage("assets/backgrounds/start.png"),
             tilingWall: PIXI.Texture.fromImage('assets/backgrounds/Game_Wall.png'),
             tilingFloor: PIXI.Texture.fromImage('assets/backgrounds/Game_floor.png'),
             gameUI: PIXI.Texture.fromImage('assets/backgrounds/ui_bg.png'),
@@ -162,6 +154,11 @@ const Params = {
             textPanel: PIXI.Texture.fromImage("assets/backgrounds/Background_screen1_Panel.png"),
             hero: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_start_Rudolf.png"),
             torchBase: PIXI.Texture.fromImage("assets/backgrounds/Backgrouns_screen1_Torch.png"),
+            bg: [
+                "assets/backgrounds/Background_screen1_start.png",
+                "assets/backgrounds/Backgrouns_screen1_closed_door.png",
+                "assets/backgrounds/Backgrouns_screen1.png"
+            ]
         },
         heart: PIXI.Texture.fromImage("assets/textures/heart.png"),
     },
