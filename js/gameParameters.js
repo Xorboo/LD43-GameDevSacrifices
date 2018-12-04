@@ -44,64 +44,62 @@ const Params = {
         }),
 
         credits: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 20,
-            fill: "#999999",
-            align: "left"
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 22,
+            fill: "#e53500",
+            align: "center"
         }),
         creditsHover: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 21,
-            fill: "#999999",
-            stroke: "black",
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 24,
+            fill: "#e53500",
+            stroke: "white",
             strokeThickness: 4,
             align: "left",
         }),
 
         failHeader: new PIXI.TextStyle({
-            fontFamily: "Plain_Germanica",
-            fontSize: 64,
-            fill: "#660000",
-            stroke: "#999999",
-            strokeThickness: 6,
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 50,
+            fill: "#e53500",
             align: "center"
         }),
-        failHint: new PIXI.TextStyle({
+        /*failHint: new PIXI.TextStyle({
             fontFamily: "Deutsch",
             fontSize: 30,
             fill: "black",
             align: "center"
-        }),
-        loseDescription: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 96,
-            fill: "black",
+        }),*/
+        failDescription: new PIXI.TextStyle({
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 36,
+            fill: "#fcf4e6",
         }),
 
         finishHeader: new PIXI.TextStyle({
-            fontFamily: "Plain_Germanica",
-            fontSize: 64,
-            fill: "black",
-            stroke: "#999999",
-            strokeThickness: 6,
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 50,
+            fill: "#e53500",
+            stroke: "black",
+            strokeThickness: 4,
             align: "center"
         }),
         finishHint: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 20,
-            fill: "black",
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 40,
+            fill: "#e53500",
             align: "center"
         }),
         finishChip: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 26,
-            fill: "black",
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 18,
+            fill: "#fcf4e6",
             align: "center"
         }),
         finishChipBad: new PIXI.TextStyle({
-            fontFamily: "Deutsch",
-            fontSize: 30,
-            fill: "#661111",
+            fontFamily: "fighting_spirit_PG_ital",
+            fontSize: 22,
+            fill: "#c37f7f",
             align: "center"
         }),
 
@@ -145,19 +143,6 @@ const Params = {
             stroke: "black",
             strokeThickness: 2,
         }),
-
-        test: new PIXI.TextStyle({
-            fontFamily: "Arial",
-            fontSize: 36,
-            fill: "white",
-            stroke: "#ff3300",
-            strokeThickness: 4,
-            dropShadow: true,
-            dropShadowColor: "black",
-            dropShadowBlur: 4,
-            dropShadowAngle: Math.PI / 6,
-            dropShadowDistance: 6,
-        }),
     },
 
     textures: {
@@ -166,7 +151,9 @@ const Params = {
             tilingWall: PIXI.Texture.fromImage('assets/backgrounds/Game_Wall.png'),
             tilingFloor: PIXI.Texture.fromImage('assets/backgrounds/Game_floor.png'),
             gameUI: PIXI.Texture.fromImage('assets/backgrounds/ui_bg.png'),
-            levelNumber: PIXI.Texture.fromImage('assets/backgrounds/Plashka_LevelNumber.png')
+            levelNumber: PIXI.Texture.fromImage('assets/backgrounds/Plashka_LevelNumber.png'),
+            gameOver: PIXI.Texture.fromImage('assets/backgrounds/GameOver_miniText.png'),
+            gameWin: PIXI.Texture.fromImage('assets/backgrounds/GameWin_bigText.png'),
         },
         button: {
             pixel: "assets/buttons/pixel.png",
@@ -214,13 +201,14 @@ const Params = {
         },
         torch: "assets/atlases/FireTorch.json",
         flashFx: "assets/atlases/Flash_Fx.json",
+        replay: "assets/atlases/Buton_Replay.json",
     },
 
     credits: [
-        ["@Xorboo - Kirill Korepanov", "https://twitter.com/Xorboo"],
-        ["@nec_neca - nEc neca", "https://twitter.com/nec_neca"],
-        //["@Mazokpixels - Evgeniy Yudin", "https://twitter.com/Mazokpixels"],
-        ["@GerodruS - Viktor Smirnov", "https://twitter.com/GerodruS"],
-        ["@NikolsaNNN - Nikolay Sambosrky", "https://twitter.com/NikolsaNNN"]
+        ["@Xorboo", "https://twitter.com/Xorboo"],
+        ["@nec_neca", "https://twitter.com/nec_neca"],
+        //["@Mazokpixels", "https://twitter.com/Mazokpixels"],
+        ["@GerodruS", "https://twitter.com/GerodruS"],
+        ["@NikolsaNNN", "https://twitter.com/NikolsaNNN"]
     ]
 }

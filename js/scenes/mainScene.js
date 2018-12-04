@@ -191,15 +191,16 @@ class MainScene extends SceneBase {
         // Move dead boss
         this.currentBoss.doFakeWalk(animationLength, (boss) => this.removeChild(boss));
 
-        // Spawn new boss if needed
         this.bossIndex++;
-        if (!this.hasGameOverChip) {
-            const titleDelay = animationLength + Params.bossIndexUpdatePause;
-            this.updateBossIndex(titleDelay, titleDelay);
-        }
-
+        
         // If we have more bosses to fight
         if (this.bossIndex < GameData.bosses.length) {
+            // Spawn new boss if needed
+            if (!this.hasGameOverChip) {
+                const titleDelay = animationLength + Params.bossIndexUpdatePause;
+                this.updateBossIndex(titleDelay, titleDelay);
+            }
+
             // Create new boss and move him
             if (!this.hasGameOverChip) {
                 this.initBoss();

@@ -5,7 +5,7 @@ let scenes = null;
 
 WebFont.load({
     custom: {
-        families: ['DeathtoMetal', 'Plain_Germanica', 'Deutsch']
+        families: ['DeathtoMetal', 'Plain_Germanica', 'Deutsch', 'fighting_spirit_PG_bold', 'fighting_spirit_PG_ital']
     },
     active: e => {
         console.log("Font loaded");
@@ -13,7 +13,7 @@ WebFont.load({
     }
 });
 
-let loadPixi = function() {
+let loadPixi = function () {
     console.log("Started loading...");
 
     // Load textures
@@ -21,7 +21,8 @@ let loadPixi = function() {
         .add(Params.atlases.hero.idle)
         .add(Params.atlases.hero.run)
         .add(Params.atlases.torch)
-        .add(Params.atlases.flashFx);
+        .add(Params.atlases.flashFx)
+        .add(Params.atlases.replay);
     for (let i = 0; i < Params.atlases.bosses.length; i++) {
         const boss = Params.atlases.bosses[i];
         PIXI.loader
@@ -30,7 +31,7 @@ let loadPixi = function() {
             .add(boss.idle)
             .add(boss.die);
     }
-    
+
     // Load sounds
     SoundManager.preloadSounds();
     PIXI.loader.load(init);

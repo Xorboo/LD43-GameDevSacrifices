@@ -659,6 +659,7 @@ const GameData = {
         ),
     },
     handChipsCount: 8,
+    
     bosses: [
         { health: 4, spriteId: 0, hint: "Education" },
         { health: 3, spriteId: 0, hint: "Pre-production" },

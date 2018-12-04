@@ -1,19 +1,19 @@
 class FinishScene extends SceneBase {
     constructor(switchCallback) {
-        super(switchCallback, null);
+        super(switchCallback, Params.textures.background.gameWin);
 
 
-        this.headerText = new PIXI.Text("You've made a game!", Params.textStyle.finishHeader);
+        this.headerText = new PIXI.Text(" You've made a game! ", Params.textStyle.finishHeader);
         this.headerText.anchor.set(0.5);
-        this.headerText.position.set(Params.application.width / 2, 150);
+        this.headerText.position.set(Params.application.width / 2, 26);
         this.addChild(this.headerText);
 
-        this.hintText = new PIXI.Text("But at what cost?", Params.textStyle.finishHint);
+        this.hintText = new PIXI.Text(" But at what cost? ", Params.textStyle.finishHint);
         this.hintText.anchor.set(0.5);
-        this.hintText.position.set(Params.application.width / 2, 190);
+        this.hintText.position.set(Params.application.width / 2, 260);
         this.addChild(this.hintText);
 
-        this.addFullscreenButton(() => {
+        this.addCreditsButton(() => {
             SM.playButton2();
             this.switchCallback(Params.sceneType.START, {});
         });
@@ -33,10 +33,10 @@ class FinishScene extends SceneBase {
         // Spawn chips
         const chipsCount = GameData.handChipsCount;
         const width = 450;
-        const height = 30;
+        const height = 23;
         const elementsPerRow = 1;
         const startX = Params.application.width / 2 - width * (elementsPerRow / 2 - 0.5);
-        const startY = 240;
+        const startY = 300;
 
         this.chipsButtons = [];
         for (let i = 0; i < data.finalChips.length; i++) {
@@ -56,7 +56,7 @@ class FinishScene extends SceneBase {
 
     addPerk(chip, x, y) {
         const chipStyle = chip.gameOver ? Params.textStyle.finishChipBad : Params.textStyle.finishChip;
-        let perk = new PIXI.Text(chip.text, chipStyle);
+        let perk = new PIXI.Text(" " + chip.text + " ", chipStyle);
         perk.anchor.set(0.5);
         perk.position.set(x, y);
         this.addChild(perk);
