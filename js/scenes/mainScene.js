@@ -12,7 +12,7 @@ class MainScene extends SceneBase {
         super(switchCallback);
 
         // Add background
-        const wallShift = 10, wallHeight = 221;
+        const wallShift = 10, wallHeight = 232;
         this.tilingBackground = new PIXI.extras.TilingSprite(
             Params.textures.background.tilingWall,
             Params.application.width,
@@ -20,7 +20,7 @@ class MainScene extends SceneBase {
         );
         this.tilingBackground.position.y = wallShift
         this.addChild(this.tilingBackground);
-
+        
         this.tilingFloor = new PIXI.extras.TilingSprite(
             Params.textures.background.tilingFloor,
             Params.application.width,
