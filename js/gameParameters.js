@@ -13,7 +13,7 @@ const Params = {
     },
 
     shiftSpeed: 300,
-    chipEvolvePause: 0.4,
+    chipEvolvePause: 2,
     extraWalkTime: 1,
     introWalkTime: 3,
     levelHeaderUpdateDelay: -1,
@@ -138,10 +138,11 @@ const Params = {
         }),
         popup: new PIXI.TextStyle({
             fontFamily: "Deutsch",
-            fontSize: 100,
+            fontSize: 50,
             fill: "white",
             stroke: "black",
             strokeThickness: 5,
+            align: "center",
         }),
     },
 

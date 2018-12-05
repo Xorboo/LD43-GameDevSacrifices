@@ -85,6 +85,10 @@ class MainScene extends SceneBase {
         this.hero = new Hero();
         this.hero.position.set(this.getUnitShiftX(), this.getUnitPositionY());
         this.gameContainer.addChild(this.hero);
+
+        this.popup = new Popup();
+        this.addChild(this.popup);
+        this.popup.position.set(Params.application.width * 0.5, Params.application.height * 0.5);
     }
 
     init(data) {
@@ -108,6 +112,7 @@ class MainScene extends SceneBase {
 
     update(deltaTime) {
         super.update(deltaTime);
+        this.popup.update(deltaTime);
     }
 
     onChipClicked(damage, chip) {
@@ -137,6 +142,8 @@ class MainScene extends SceneBase {
             });
             delayTimer.start();
         }
+
+        this.popup.setText('You sacrificed your plan:\n"' + chip.text + '"');
     }
 
     updateChipButtons() {
@@ -179,8 +186,19 @@ class MainScene extends SceneBase {
         evolveTimer.repeat = this.chipsButtons.length;
         evolveTimer.on('repeat', (elapsed, repeat) => {
             const chipButton = this.chipsButtons[repeat + Params.levelHeaderUpdateDelay];
+
+            const isSacrificed = chipButton.isSacrificed;
+            const oldText = chipButton.chip.text;
             chipButton.evolveChip(killedBossIndex);
+            const newText = chipButton.chip.text;
+
             chipButton.interactive = false;
+
+            if (isSacrificed) {
+                this.popup.setText('You sacrifice plan\n"' + oldText + '"\nbrought you a new plan:\n"' + newText);
+            } else {
+                this.popup.setText('You fulfilled plan\n"' + oldText + '"\nand had a new plan:\n"' + newText);
+            }
         });
         evolveTimer.start();
 
@@ -308,7 +326,7 @@ class MainScene extends SceneBase {
     }
 
     getAnimationLength() {
-        return Params.chipEvolvePause * this.chipsButtons.length + Params.extraWalkTime;
+        return Params.chipEvolvePause * (1 + this.chipsButtons.length) + Params.extraWalkTime;
     }
 
     loseGame(chip) {

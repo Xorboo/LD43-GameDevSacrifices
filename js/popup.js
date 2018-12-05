@@ -1,10 +1,4 @@
 class Popup extends PIXI.Container {
-    // this.popup = new Popup();
-    // this.addChild(this.popup);
-    // this.popup.position.set(Params.application.width * 0.5, Params.application.height * 0.5);
-    // this.popup.setText("Text");
-    //
-    // add update callring to Update
     constructor() {
         super();
 
@@ -17,7 +11,9 @@ class Popup extends PIXI.Container {
     }
 
     update(deltaTime) {
-        this.alpha -= 0.5 * deltaTime;
+        if (0 < this.alpha) {
+            this.alpha -= 0.5 * deltaTime;
+        }
     }
 
     setText(text) {
