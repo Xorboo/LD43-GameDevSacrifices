@@ -136,6 +136,13 @@ const Params = {
             stroke: "black",
             strokeThickness: 2,
         }),
+        popup: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 100,
+            fill: "white",
+            stroke: "black",
+            strokeThickness: 5,
+        }),
     },
 
     textures: {
