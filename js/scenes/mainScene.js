@@ -143,7 +143,7 @@ class MainScene extends SceneBase {
             delayTimer.start();
         }
 
-        this.popup.setText('You sacrificed your plan:\n"' + chip.text + '"');
+        this.popup.setText('You sacrificed your plan:', '"' + chip.text + '"', null, null, true);
     }
 
     updateChipButtons() {
@@ -195,9 +195,9 @@ class MainScene extends SceneBase {
             chipButton.interactive = false;
 
             if (isSacrificed) {
-                this.popup.setText('You sacrifice plan\n"' + oldText + '"\nbrought you a new plan:\n"' + newText);
+                this.popup.setText('Your sacrificed plan', '"' + oldText + '"', 'brought you a new plan:', '"' + newText + '"', true);
             } else {
-                this.popup.setText('You fulfilled plan\n"' + oldText + '"\nand had a new plan:\n"' + newText);
+                this.popup.setText('You fulfilled plan', '"' + oldText + '"', 'and had a new plan:', '"' + newText + '"', false);
             }
         });
         evolveTimer.start();
