@@ -58,9 +58,14 @@ class MainScene extends SceneBase {
         this.levelNumberSprite.addChild(this.levelHeader);
 
         // Sacrifice text
+        this.sacrificeHeaderSmall = new PIXI.Text("Choose Your", Params.textStyle.sacrificeSmall);
+        this.sacrificeHeaderSmall.anchor.set(0.5);
+        this.sacrificeHeaderSmall.position.set(Params.application.width / 2, Params.application.height - 188);
+        this.addChild(this.sacrificeHeaderSmall);
+
         this.sacrificeHeader = new PIXI.Text("Sacrifice", Params.textStyle.sacrifice);
         this.sacrificeHeader.anchor.set(0.5);
-        this.sacrificeHeader.position.set(Params.application.width / 2, Params.application.height - 177);
+        this.sacrificeHeader.position.set(Params.application.width / 2, Params.application.height - 168);
         this.addChild(this.sacrificeHeader);
 
 

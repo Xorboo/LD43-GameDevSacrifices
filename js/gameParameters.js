@@ -117,9 +117,14 @@ const Params = {
             fontSize: 36,
             fill: "black"
         }),
+        sacrificeSmall: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 18,
+            fill: "black"
+        }),
         sacrifice: new PIXI.TextStyle({
             fontFamily: "Plain_Germanica",
-            fontSize: 28,
+            fontSize: 24,
             fill: "black"
         }),
         chip: new PIXI.TextStyle({
