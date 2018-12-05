@@ -12,6 +12,8 @@ const Params = {
         FINISH: 4
     },
 
+    hintDelay: 3,
+
     shiftSpeed: 300,
     chipEvolvePause: 2,
     extraWalkTime: 1,
@@ -101,6 +103,14 @@ const Params = {
             fontSize: 32,
             fill: "black",
             align: "center"
+        }),
+        hintText: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 32,
+            fill: "black",
+            align: "center",
+            stroke: "white",
+            strokeThickness: 4,
         }),
         levelHeader: new PIXI.TextStyle({
             fontFamily: "DeathtoMetal",
