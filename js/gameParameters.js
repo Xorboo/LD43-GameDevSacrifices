@@ -216,6 +216,7 @@ const Params = {
             ]
         },
         heart: PIXI.Texture.fromImage("assets/textures/heart.png"),
+        arrow: PIXI.Texture.fromImage("assets/textures/arrow_down.png"),
     },
 
     sounds: {

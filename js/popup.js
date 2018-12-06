@@ -21,6 +21,13 @@ class Popup extends PIXI.Container {
             this.labels[i] = label;
         }
 
+        this.arraySprite = new PIXI.Sprite(Params.textures.arrow);
+        this.arraySprite.anchor.set(0.5);
+        this.arraySprite.scale.set(0.5);
+        this.arraySprite.position.y += 5;
+        this.arraySprite.tint = 0xfbf3cf;
+        this.addChild(this.arraySprite);
+
         this.alpha = 0;
         this.enabled = false;
     }
@@ -40,6 +47,8 @@ class Popup extends PIXI.Container {
 
         this.labels[1].style = isSacrifice ? Params.textStyle.popupSacrificed : Params.textStyle.popupFulfilled;
         this.labels[3].style = isGameOver ? Params.textStyle.popupGameOver : Params.textStyle.popupLarge;
+
+        this.arraySprite.visible = text3 != null;
 
         this.alpha = 2;
         this.enabled = true;
