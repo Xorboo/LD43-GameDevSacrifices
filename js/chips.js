@@ -72,6 +72,20 @@ const GameData = {
             true,
         ),
 
+        stroke: new Chip(
+            "You've suffered a stroke",
+            null,
+            null,
+            true,
+        ),
+
+        illness: new Chip(
+            "Grave illness",
+            null,
+            null,
+            true,
+        ),
+
         divorce: new Chip(
             "Divorce",
         ),
@@ -235,7 +249,7 @@ const GameData = {
         migraine: new Chip(
             "Migraine",
             _ => GameData.chips.sleepDeprivation,
-            _ => GameData.chips.leftGameDev,
+            _ => GameData.chips.stroke,
         ),
 
         alwaysDreaming: new Chip(
@@ -643,19 +657,19 @@ const GameData = {
         visitDoctor: new Chip(
             "Visit a doctor",
             _ => GameData.chips.takeMedication,
-            _ => GameData.chips.leftGameDev,
+            _ => GameData.chips.illness,
         ),
 
         takeMedication: new Chip(
             "Take medication",
             _ => GameData.chips.activeRest2,
-            _ => GameData.chips.leftGameDev,
+            _ => GameData.chips.illness,
         ),
 
         activeRest2: new Chip(
             "Active rest",
             _ => GameData.chips.activeRest2,
-            _ => GameData.chips.leftGameDev,
+            _ => GameData.chips.illness,
         ),
     },
     handChipsCount: 8,
