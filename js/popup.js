@@ -32,13 +32,14 @@ class Popup extends PIXI.Container {
         this.enabled = 0 < this.alpha;
     }
 
-    setText(text0, text1, text2, text3, isSacrifice) {
+    setText(text0, text1, text2, text3, isSacrifice, isGameOver) {
         this.labels[0].text = text0;
         this.labels[1].text = text1;
         this.labels[2].text = text2;
         this.labels[3].text = text3;
 
         this.labels[1].style = isSacrifice ? Params.textStyle.popupSacrificed : Params.textStyle.popupFulfilled;
+        this.labels[3].style = isGameOver ? Params.textStyle.popupGameOver : Params.textStyle.popupLarge;
 
         this.alpha = 2;
         this.enabled = true;

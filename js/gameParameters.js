@@ -183,6 +183,14 @@ const Params = {
             strokeThickness: 10,
             align: "center",
         }),
+        popupGameOver: new PIXI.TextStyle({
+            fontFamily: "Deutsch",
+            fontSize: 70,
+            fill: "#661111",
+            stroke: "black",
+            strokeThickness: 10,
+            align: "center",
+        }),
     },
 
     textures: {
